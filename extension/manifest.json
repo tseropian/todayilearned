@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+
+  "name": "Today I Learned",
+  "description": "TODO",
+  "version": "1.0",
+  "author": "Thomas Seropian",
+
+  "icons": {
+    "48": "icon48.png"
+  }, 
+  "browser_action": {
+        "default_title": "Today I Learned",
+        "default_icon": {
+          "19":"icon20.png",
+          "20":"icon20.png",
+          "38":"icon38.png"
+        },  
+    "default_popup": "dashboard.html"
+  },
+    "content_scripts": [
+    {
+      "matches": ["*://*.wikipedia.org/*"],
+      "js": ["client.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab"
+  ]
+}
