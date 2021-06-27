@@ -1,0 +1,18 @@
+{
+    "version": "2017-02-28",
+    "operation": "PutItem",
+    "key": {
+        "id":  { "S" : "${context.arguments.id}" }
+    },
+    "attributeValues": {
+        "url": { "S" : "${context.arguments.url}" },
+        "date": { "S" : "${context.arguments.date}" },
+        "source": { "S" : "${context.arguments.source}" },
+    },
+    "condition": {
+        "expression": "attribute_not_exists(#id)",
+        "expressionNames": {
+            "#id": "id",
+        }
+    }
+}

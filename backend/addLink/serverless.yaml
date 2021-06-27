@@ -1,0 +1,28 @@
+service: til-addlink
+plugins:
+  - serverless-offline
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-east-1
+  environment:
+    DYNAMODB_TABLE: todayilearn-appsync
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  create:
+    handler: src/addLink.addLink
+    events:
+      - http:
+          path: links
+          method: post
+          cors: true
