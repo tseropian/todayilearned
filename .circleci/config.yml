@@ -2,8 +2,8 @@ jobs:
   build:  
     docker:
       - image: cimg/node:14.17.1
-      
-    build_dir: backend/addLink
+
+    working_directory: backend/addLink
 
     steps:
       - checkout
