@@ -40,3 +40,4 @@ terraform.rc
 .serverless
 
 extension/web-ext-artifacts
+website/nuxt-dist
