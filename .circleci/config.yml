@@ -23,7 +23,9 @@ jobs:
 
       - run:
           name: Deploy application
-          command: sls deploy
+          command: |
+            cd backend/addLink
+            sls deploy
           
       - save_cache:
           paths:
