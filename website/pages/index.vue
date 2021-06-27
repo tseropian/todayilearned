@@ -1,10 +1,15 @@
 <template>
   <div class="container">
     <div>
-      <Logo />
+      <div style="margin:0 auto; width: 512px;">
+        <Logo />
+      </div>
       <h1 class="title">
         Today I Learned
       </h1>
+      <h2>
+        A highly over-engineered project to track the things I'm (not) learning on Wikipedia.
+      </h2>
 
       <div class="links">
         <a
@@ -23,6 +28,7 @@
         >
           GitHub
         </a>
+        </p>
       </div>
     </div>
   </div>
