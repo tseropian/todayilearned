@@ -1,17 +1,16 @@
 'use strict';
 
 const AWS = require('aws-sdk');
-const s3 = new AWS.S3({signatureVersion: 'v4'});
 const dynamo = new AWS.DynamoDB.DocumentClient();
 
 module.exports.graphql = async (event) => {
   
   console.log('Received event {}', JSON.stringify(event, 3));
   console.log('Got an Invoke Request.');
-
+  console.log(event);
   switch (event.field) {
     case 'getLinksByDate': {
-      return getLinksByDate(bucket, key);
+      return getLinksByDate(event.argument.date);
     }
 
     default: {
@@ -19,15 +18,15 @@ module.exports.graphql = async (event) => {
     }
   }
 };
-async function getLinksByDate(imageName) {
+
+async function getLinksByDate(date) {
+  console.log('ladate', date)
   const params = {
-    Key: {
-        name: imageName
+    gt: {
+      date: date
     },
     TableName:'appsync-intro-image-table'
     };
   
-  return dynamo.get(params).promise().then(result => {
-    return result.Item;
-  });
+  return dynamo.get(params).promise().then(result => result.Items);
 }

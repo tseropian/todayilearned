@@ -6,7 +6,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
 
   iamRoleStatements:
     - Effect: "Allow"
@@ -20,7 +20,7 @@ custom:
   appSync:
     name:  til-appsync
     authenticationType: API_KEY
-    schema: schema.gql
+    schema: schema.graphql
     mappingTemplates:
       - dataSource: Links
         type: Mutation

@@ -1,17 +1,45 @@
 <template>
   <div id="home">
     <h1>Get in touch</h1>
-    <p>Drop us a line for questions, feedback and comments on Twitter or via email.</p>
-    <br>
-    <br>
-    <br>
-    <ul>
-      <li>Email: <a href="mailto:hello@hoopcharts.xyz" target="_blank">hello@hoopcharts.xyz</a></li>
-      <li>Twitter: <a href="https://twitter.com/thoomyorke" target="_blank">@thoomyorke</a></li>
+    <ul id="example-1">
+      <li v-for="(item, index) in dates" :key="index">
+        <h2>{{ item }}</h2>
+      </li>
     </ul>
     <Footer />
   </div>
 </template>
+
+<script>
+
+import { format, subDays } from 'date-fns'
+export default {
+  data: () => ({
+    dates: []
+  }),
+  created () {
+    this.generateDates()
+  },
+  mounted () {
+  },
+  methods: {
+    onClick () {
+      document.getElementById('luxbar-checkbox').checked = false
+      document.getElementsByClassName('luxbar-menu')[0].scrollTop = 0
+    },
+    generateDates () {
+      for (let i = 0; i < 30; i++) {
+        this.dates.push(format(subDays(new Date(), i), 'yyyy-MM-dd'))
+      }
+    },
+    getLinks (date) {
+      const startTime = 1234
+      const endTime = 5678
+    }
+
+  }
+}
+</script>
 
 <style>
 html {

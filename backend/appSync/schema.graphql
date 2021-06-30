@@ -1,5 +1,7 @@
 type Query {
-    getLinksByDate(date: String!): Link!
+    getLinksByDate(
+        date: String!
+    ): Link!
 }
 type Mutation {
         saveLink(id: String!, url: String!, date: String!, source: String!): Link!
