@@ -10,7 +10,6 @@
   const options = {
   method: 'POST',
   headers: {
-    'x-api-key': 'da2-sx6jlo4pn5cwfjh4nqfqfjfm7a',
     'Accept': 'application/json',
     'Content-Type': 'application/json;charset=UTF-8'
   },
