@@ -4,7 +4,7 @@
   console.log(url, dateNow);
   console.log(navigator.userAgent)
   // const posturl = 'https://etcczvhf3na75fh7buadst6bhm.appsync-api.us-east-1.amazonaws.com/graphql';
-  const posturl = 'https://bx57iqgdb5.execute-api.us-east-1.amazonaws.com/dev/links';
+  const posturl = 'https://v2uvowrw9j.execute-api.eu-west-1.amazonaws.com/dev/links';
   
 
   const options = {

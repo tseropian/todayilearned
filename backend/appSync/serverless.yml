@@ -7,6 +7,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
+  region: eu-west-1
 
   iamRoleStatements:
     - Effect: "Allow"
@@ -15,7 +16,7 @@ provider:
       Resource: "arn:aws:dynamodb:#{AWS::Region}:*:table/${self:custom.LINKS_TABLE}"
 
 custom:      
-  LINKS_TABLE: todayilearn-appsync
+  LINKS_TABLE: til-links-appsync
 
   appSync:
     name:  til-appsync
@@ -70,10 +71,14 @@ resources:
       Type: "AWS::DynamoDB::Table"
       Properties:
         KeySchema:
-          - AttributeName: id
+          - AttributeName: postDate
             KeyType: HASH
+          - AttributeName: linkId
+            KeyType: RANGE       
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: postDate
             AttributeType: S
+          - AttributeName: linkId
+            AttributeType: S          
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:custom.LINKS_TABLE} 

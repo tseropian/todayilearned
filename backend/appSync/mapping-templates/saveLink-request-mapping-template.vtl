@@ -2,17 +2,19 @@
     "version": "2017-02-28",
     "operation": "PutItem",
     "key": {
-        "id":  { "S" : "${context.arguments.id}" }
+        "linkId":  { "S" : "${context.arguments.linkId}" }
     },
     "attributeValues": {
+        "linkId": { "S" : "${context.arguments.linkId}" },
         "url": { "S" : "${context.arguments.url}" },
-        "date": { "S" : "${context.arguments.date}" },
+        "postDate": { "S" : "${context.arguments.postDate}" },
+        "timestamp": { "S" : "${context.arguments.timestamp}" },
         "source": { "S" : "${context.arguments.source}" },
     },
     "condition": {
-        "expression": "attribute_not_exists(#id)",
+        "expression": "attribute_not_exists(#linkId)",
         "expressionNames": {
-            "#id": "id",
+            "#linkId": "linkId",
         }
     }
 }

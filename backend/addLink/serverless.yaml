@@ -4,9 +4,9 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
-  region: us-east-1
+  region: eu-west-1
   environment:
-    DYNAMODB_TABLE: todayilearn-appsync
+    DYNAMODB_TABLE: til-links-appsync
   iamRoleStatements:
     - Effect: Allow
       Action:
