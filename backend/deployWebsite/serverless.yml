@@ -1,0 +1,16 @@
+service: til-deploywebsite
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+
+plugins:
+  - serverless-offline
+
+functions:
+  deploy:
+    handler: handler.deploy
+    events:
+      - schedule:  cron(0 * * * ? *)
