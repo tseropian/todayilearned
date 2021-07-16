@@ -1,0 +1,21 @@
+service: til-get-links-by-date
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  environment:
+    DYNAMODB_TABLE: til-links-live
+  region: eu-west-1
+
+plugins:
+  - serverless-offline
+
+functions:
+  hello:
+    handler: handler.getLinks
+    events:
+      - http:
+          path: links/{date}
+          method: get
