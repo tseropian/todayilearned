@@ -11,7 +11,6 @@ const dynamoDb = new DynamoDB.DocumentClient()
 
 module.exports.addLink = (event, context, callback) => {
   const data = JSON.parse(event.body)
-  console.log(data)
   let timestamp
   if (data.date) {
     timestamp = data.date
@@ -20,7 +19,6 @@ module.exports.addLink = (event, context, callback) => {
   }
 
   const postDate = format(new Date(timestamp), 'yyyy-MM-dd')
-  console.log(postDate)
   const { url, source } = data
 
   const params = {
