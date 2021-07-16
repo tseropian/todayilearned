@@ -7,7 +7,7 @@ variable "secret_key" {
 
 variable "table_name" {
   description = "Dynamodb table name (space is not allowed)"
-  default = "todayilearned-links"
+  default = "til-links-live"
 }
 
 variable "table_billing_mode" {

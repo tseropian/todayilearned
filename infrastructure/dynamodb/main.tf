@@ -7,12 +7,18 @@ provider "aws" {
 resource "aws_dynamodb_table" "todayilearned-links" {
   name        = "${var.table_name}"
   billing_mode = "${var.table_billing_mode}"
-  hash_key       = "linkId"
+  hash_key       = "postDate"
+  range_key       = "linkId"
   attribute {
     name = "linkId"
     type = "S"
   }
-   tags = {
+  attribute {
+    name = "postDate"
+    type = "S"
+  }
+  
+  tags = {
     environment       = "${var.environment}"
   }
 }
