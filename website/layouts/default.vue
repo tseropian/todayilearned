@@ -3,7 +3,12 @@
     <h1>Get in touch</h1>
     <ul id="example-1">
       <li v-for="(item, index) in dates" :key="index">
-        <h2>{{ item }}</h2>
+        <h2>{{ item.date }}</h2>
+        <ul id="links-per-day">
+          <li v-for="(link, indexLink) in item.links" :key="indexLink">
+            <a :href="link.url">{{ formatLink(link.url) }}</a>
+          </li>
+        </ul>
       </li>
     </ul>
     <Footer />
@@ -13,6 +18,8 @@
 <script>
 
 import { format, subDays } from 'date-fns'
+import axios from 'axios'
+
 export default {
   data: () => ({
     dates: []
@@ -21,20 +28,33 @@ export default {
     this.generateDates()
   },
   mounted () {
+    // console.log(process.env.TIL_API_HOST)
   },
   methods: {
-    onClick () {
-      document.getElementById('luxbar-checkbox').checked = false
-      document.getElementsByClassName('luxbar-menu')[0].scrollTop = 0
-    },
-    generateDates () {
-      for (let i = 0; i < 30; i++) {
-        this.dates.push(format(subDays(new Date(), i), 'yyyy-MM-dd'))
+
+    async generateDates () {
+      for (let i = 0; i < 4 * 30; i++) {
+        const date = format(subDays(new Date(), i), 'yyyy-MM-dd')
+        this.dates.push(
+          {
+            date,
+            links: await this.getLinks(date)
+          }
+        )
+        // console.log(this.dates)
       }
     },
-    getLinks (date) {
-      const startTime = 1234
-      const endTime = 5678
+    async getLinks (date) {
+      const url = process.env.TIL_API_HOST + 'links/' + date
+      // console.log(url)
+      const links = await axios.get(url).then(res => res.data
+      )
+      return links.result[0]
+    },
+
+    formatLink (url) {
+      const title = url.split('/wiki/')[1]
+      return title.replaceAll('_', ' ')
     }
 
   }
