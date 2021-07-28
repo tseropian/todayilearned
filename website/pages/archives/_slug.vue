@@ -1,4 +1,3 @@
-
 <template>
   <div id="home">
     <div id="caption">
@@ -6,7 +5,7 @@
         Today I Learned
       </h1>
       <h2>
-        A nerdy list of the things I'm (not) learning on Wikipedia
+        Archives:
       </h2>
 
       <div style="margin:0 auto; width: 80%">
@@ -30,14 +29,7 @@
         >
           GitHub
         </a>
-        </p>
       </div>
-      <h2>Archives</h2>
-      <div id="archives" />
-      <div v-for="year in years" :key="year">
-        {{ year }}
-        <span v-for=" month in months" :key="month"><a :href="'/archives/' + year + '-' + month">{{ month }}</a>/</span>
-      </div>"
     </div>
     <div id="links">
       <LinksList
@@ -46,43 +38,31 @@
       />
     </div>
     <div style="clear:both" />
-
-    </a></span>
-  </div>
-  </div>
   </div>
 </template>
 
 <script>
 
-import { format, subDays } from 'date-fns'
+import { format, addDays } from 'date-fns'
 import LinksList from '~/components/LinksList'
 
 export default {
   components: {
     LinksList
   },
-  data: () => ({
-    startDate: format(new Date(), 'yyyy-MM-dd'),
-    endDate: format(subDays(new Date(), 30), 'yyyy-MM-dd')
-  }),
-  computed: {
-    years () {
-      const year = new Date().getFullYear()
-      const years = []
-      for (let i = 2019; i < year; i++) {
-        years.push(i)
-      }
 
-      return years.reverse()
-    },
-    months () {
-      const months = []
-      for (let i = 1; i <= 12; i++) {
-        months.push(i)
-      }
-      return months
-    }
+  asyncData ({ params }) {
+    const slug = params.slug
+    const endDate = slug + '-01'
+    const startDate = format(addDays(new Date(endDate), 30), 'yyyy-MM-dd')
+
+    return { startDate, endDate }
+  },
+  data: () => ({
+
+  }),
+  mounted () {
+    console.log(this.slug)
   }
 }
 </script>
