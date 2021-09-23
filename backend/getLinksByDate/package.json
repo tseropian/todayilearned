@@ -1,0 +1,11 @@
+{
+  "name": "getLinksByDate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/util-dynamodb": "^3.20.0",
+    "aws-sdk": "^2.943.0",
+    "serverless-offline": "^7.0.0"
+  }
+}

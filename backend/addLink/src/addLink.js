@@ -1,28 +1,33 @@
 'use strict'
+const { format } = require('date-fns')
 
 const { v4: uuidv4 } = require('uuid')
 const { DynamoDB } = require('aws-sdk')
 const AWS = require('aws-sdk')
 AWS.config.update({
-  region: 'us-east-1'
+  region: 'eu-west-1'
 })
 const dynamoDb = new DynamoDB.DocumentClient()
 
 module.exports.addLink = (event, context, callback) => {
   const data = JSON.parse(event.body)
-  console.log(data)
   let timestamp
-  if (data.body.date) {
-    timestamp = data.body.date
+  if (data.date) {
+    timestamp = data.date
   } else {
     timestamp = new Date().getTime()
   }
+
+  const postDate = format(new Date(timestamp), 'yyyy-MM-dd')
+  const { url, source } = data
+
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
     Item: {
-      id: uuidv4(),
-      url: data.body.url,
-      source: data.body.source,
+      linkId: uuidv4(),
+      postDate,
+      url,
+      source,
       date: timestamp
     }
   }
@@ -30,7 +35,7 @@ module.exports.addLink = (event, context, callback) => {
   dynamoDb.put(params, (error, result) => {
     if (error) {
       console.error(error)
-      callback(new Error('Couldn\'t create the todo item.'))
+      callback(new Error('Couldn\'t create link.'))
       return
     }
 

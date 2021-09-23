@@ -1,5 +1,5 @@
 {
-  "name": "appsync",
+  "name": "deploywebsite",
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "serverless-appsync-plugin": "^1.11.3",
-    "serverless-pseudo-parameters": "^2.5.0"
+    "axios": "^0.21.1",
+    "serverless-offline": "^7.0.0"
   }
 }

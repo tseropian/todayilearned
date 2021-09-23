@@ -1,12 +1,14 @@
-service: til-addlink
-plugins:
-  - serverless-offline
+service: til-get-links-by-date
+frameworkVersion: '2'
+
 provider:
   name: aws
   runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
   region: eu-west-1
   environment:
     DYNAMODB_TABLE: til-links-live
+
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -18,11 +20,13 @@ provider:
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
+plugins:
+  - serverless-offline
+
 functions:
-  create:
-    handler: src/addLink.addLink
+  hello:
+    handler: handler.getLinks
     events:
       - http:
-          path: links
-          method: post
-          cors: true
+          path: links/{date}
+          method: get

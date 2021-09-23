@@ -1,15 +1,17 @@
+
 <template>
-  <div class="container">
-    <div>
-      <div style="margin:0 auto; width: 512px;">
-        <Logo />
-      </div>
-      <h1 class="title">
+  <div id="home">
+    <div id="caption">
+      <h1>
         Today I Learned
       </h1>
       <h2>
-        A highly over-engineered project to track the things I'm (not) learning on Wikipedia.
+        A nerdy list of the things I'm (not) learning on Wikipedia
       </h2>
+
+      <div style="margin:0 auto; width: 80%">
+        <Logo />
+      </div>
 
       <div class="links">
         <a
@@ -28,60 +30,95 @@
         >
           GitHub
         </a>
-        </p>
+      </div>
+      <h2>Archives</h2>
+      <div id="archives" />
+      <div v-for="year in years" :key="year">
+        <strong>{{ year }}:</strong>
+        <span v-for="month in getDateRange(year)" :key="month"><a :href="'/archives/' + year + '-' + formatMonth(month) ">{{ formatMonth(month) }}</a>.</span>
       </div>
     </div>
+    <div id="links">
+      <LinksList
+        :start="startDate"
+        :end="endDate"
+      />
+    </div>
+    <div style="clear:both" />
+  </div>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 
-export default Vue.extend({})
+import { format, subDays } from 'date-fns'
+import LinksList from '~/components/LinksList'
+
+export default {
+  components: {
+    LinksList
+  },
+  data: () => ({
+    startDate: format(new Date(), 'yyyy-MM-dd'),
+    endDate: format(subDays(new Date(), 30), 'yyyy-MM-dd'),
+    dateRange: []
+  }),
+  computed: {
+    years () {
+      const year = new Date().getFullYear()
+      const years = []
+      for (let i = 2019; i <= year; i++) {
+        years.push(i)
+      }
+
+      return years.reverse()
+    },
+    months () {
+      const months = []
+      for (let i = 1; i <= 12; i++) {
+        months.push(i)
+      }
+      return months
+    }
+
+  },
+  created () {
+    this.createDateRange()
+  },
+  methods: {
+    formatNumber (nb) {
+      return nb.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })
+    },
+    getDateRange (year) {
+      const currentRange = this.dateRange.filter((f) => {
+        const date = f.split('-')
+        return date[0] === year.toString()
+      })
+
+      return currentRange.reverse()
+    },
+    createDateRange () {
+      const startDate = '2019-01-01'
+      const start = startDate.split('-')
+      const end = this.startDate.split('-')
+      const startYear = parseInt(start[0])
+      const endYear = parseInt(end[0])
+      const dates = []
+      for (let i = startYear; i <= endYear; i++) {
+        const endMonth = i !== endYear ? 11 : parseInt(end[1]) - 1
+        const startMon = i === startYear ? parseInt(start[1]) - 1 : 0
+        for (let j = startMon; j <= endMonth; j = j > 12 ? j % 12 || 11 : j + 1) {
+          const month = j + 1
+          const displayMonth = month < 10 ? '0' + month : month
+          dates.push([i, displayMonth].join('-'))
+        }
+      }
+      this.dateRange = dates.reverse()
+    },
+    formatMonth (month) {
+      return month.split('-')[1]
+    }
+
+  }
+}
 </script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
