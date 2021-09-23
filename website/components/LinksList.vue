@@ -64,8 +64,9 @@ export default {
     },
 
     formatLink (url) {
+      console.log(url)
       const title = url.split('/wiki/')[1]
-      if (title) { return title.replaceAll('_', ' ') }
+      if (title) { return decodeURI(title.replaceAll('_', ' ')) }
       return ''
     }
   }

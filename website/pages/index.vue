@@ -30,14 +30,13 @@
         >
           GitHub
         </a>
-        </p>
       </div>
       <h2>Archives</h2>
       <div id="archives" />
       <div v-for="year in years" :key="year">
-        {{ year }}
-        <span v-for=" month in months" :key="month"><a :href="'/archives/' + year + '-' + month">{{ month }}</a>/</span>
-      </div>"
+        <strong>{{ year }}:</strong>
+        <span v-for="month in getDateRange(year)" :key="month"><a :href="'/archives/' + year + '-' + formatMonth(month) ">{{ formatMonth(month) }}</a>.</span>
+      </div>
     </div>
     <div id="links">
       <LinksList
@@ -46,9 +45,6 @@
       />
     </div>
     <div style="clear:both" />
-
-    </a></span>
-  </div>
   </div>
   </div>
 </template>
@@ -64,13 +60,14 @@ export default {
   },
   data: () => ({
     startDate: format(new Date(), 'yyyy-MM-dd'),
-    endDate: format(subDays(new Date(), 30), 'yyyy-MM-dd')
+    endDate: format(subDays(new Date(), 30), 'yyyy-MM-dd'),
+    dateRange: []
   }),
   computed: {
     years () {
       const year = new Date().getFullYear()
       const years = []
-      for (let i = 2019; i < year; i++) {
+      for (let i = 2019; i <= year; i++) {
         years.push(i)
       }
 
@@ -83,6 +80,45 @@ export default {
       }
       return months
     }
+
+  },
+  created () {
+    this.createDateRange()
+  },
+  methods: {
+    formatNumber (nb) {
+      return nb.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })
+    },
+    getDateRange (year) {
+      const currentRange = this.dateRange.filter((f) => {
+        const date = f.split('-')
+        return date[0] === year.toString()
+      })
+
+      return currentRange.reverse()
+    },
+    createDateRange () {
+      const startDate = '2019-01-01'
+      const start = startDate.split('-')
+      const end = this.startDate.split('-')
+      const startYear = parseInt(start[0])
+      const endYear = parseInt(end[0])
+      const dates = []
+      for (let i = startYear; i <= endYear; i++) {
+        const endMonth = i !== endYear ? 11 : parseInt(end[1]) - 1
+        const startMon = i === startYear ? parseInt(start[1]) - 1 : 0
+        for (let j = startMon; j <= endMonth; j = j > 12 ? j % 12 || 11 : j + 1) {
+          const month = j + 1
+          const displayMonth = month < 10 ? '0' + month : month
+          dates.push([i, displayMonth].join('-'))
+        }
+      }
+      this.dateRange = dates.reverse()
+    },
+    formatMonth (month) {
+      return month.split('-')[1]
+    }
+
   }
 }
 </script>

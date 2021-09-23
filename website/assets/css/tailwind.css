@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
 body {
   color: #26261C;
-  font-family: 'Montserrat', sans-serif;
+  /* font-family: 'Montserrat', sans-serif; */
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.02em;
@@ -26,11 +27,11 @@ h1 {
 }
 
 #list {
-  border: 1px solid green;
   float: left;
   width: 75%;
   display: grid;
-  grid-template-columns: 22% 22% 22% 22%;
+  grid-template-columns: 24% 24% 24% 24%;
+  /* grid-template-columns: auto auto auto auto; */
   grid-column-gap: 2%;
   grid-row-gap: 2em;
   text-align: left;
@@ -44,28 +45,35 @@ h1 {
   /* display: inline-block; */
   display: inline-grid;
   background: #D8D9D7;
-  border-radius: 1em;
+  border-radius: 0.3em;
   padding: 0.5em 1em;
 }
 
 .single-day ul {
   margin: 0;
-  border: 1px solid blue;
   padding: 0;
   line-height: 1.8em;
+  max-width: 20em;
 }
 
 .single-day li {
   padding: 0.2em;
+  padding-left: 1em;
+  margin-bottom: 0.5em;
   margin-right: 1em;
-  display: inline;
+  /* display: inline; */
   background: #26261C;
+  width: 16em;
+  border-radius: 0.3em;
+  list-style-type: none;
 }
 
-.single-day a:visited{
+.single-day a{
   color: #D8D9D7;
 }
-
+.single-day a:visited {
+  color: #D8D9D7;
+}
 
 .single-day p {
   font-weight: bold;
