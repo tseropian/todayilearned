@@ -48,6 +48,8 @@ async function getLinksByDate(postDate) {
       uniqueResults.filter(f => f.url === r.url).length === 0
       && 
       r.url.substr(- 4, 4) !== '.jpg'
+      && 
+      !r.url.includes('w/index.php')
     ) {
       uniqueResults.push(r)
     }
@@ -60,7 +62,6 @@ module.exports.getLinks = async (event) => {
   const dates = event.pathParameters.date.split(',');
   const result = [];
   for (let d of dates) {
-    console.log(d)
     const resultSingledate = await getLinksByDate(d);
     result.push(resultSingledate)
   }
