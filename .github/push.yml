@@ -18,6 +18,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: REGION-NAME
     - name: Build static site
-      run: yarn install && yarn build
+      run: cd website && yarn install && yarn build
     - name: Deploy static site to S3 bucket
       run: aws s3 sync ./dist/ s3://s3-bucket-arn --delete

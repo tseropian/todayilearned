@@ -33,9 +33,9 @@
       </div>
       <h2>Archives</h2>
       <div id="archives" />
-      <div v-for="year in years" :key="year">
+      <div v-for="year in years" :key="year" class="archive-links">
         <strong>{{ year }}:</strong>
-        <span v-for="month in getDateRange(year)" :key="month"><a :href="'/archives/' + year + '-' + formatMonth(month) ">{{ formatMonth(month) }}</a>.</span>
+        <span v-for="month in getDateRange(year)" :key="month" class="archive-link"><a :href="'/archives/' + year + '-' + formatMonth(month) ">{{ formatMonth(month) }}</a>.</span>
       </div>
     </div>
     <div id="links">
