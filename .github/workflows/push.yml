@@ -17,6 +17,10 @@ jobs:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-west-1
+    - name: Create env file for website
+      run: |
+        touch .env
+        echo TIL_API_HOST =${{ secrets.TIL_API_HOST }} >> ./website/.env
     - name: Build static site
       run: cd website && yarn install && yarn build && yarn generate
     - name: Deploy static site to S3 bucket
