@@ -41,3 +41,5 @@ terraform.rc
 
 extension/web-ext-artifacts
 website/nuxt-dist
+
+.DS_Store
