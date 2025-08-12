@@ -5,7 +5,7 @@
         Today I Learned
       </h1>
       <h2>
-        Archives:
+        Archives: {{ slug }}
       </h2>
 
       <div style="margin:0 auto; width: 80%">
@@ -41,28 +41,12 @@
   </div>
 </template>
 
-<script>
-
+<script setup>
 import { format, addDays } from 'date-fns'
-import LinksList from '~/components/LinksList'
 
-export default {
-  components: {
-    LinksList
-  },
+const route = useRoute()
+const slug = route.params.slug
 
-  asyncData ({ params }) {
-    const slug = params.slug
-    const endDate = slug + '-01'
-    const startDate = format(addDays(new Date(endDate), 30), 'yyyy-MM-dd')
-
-    return { startDate, endDate }
-  },
-  data: () => ({
-
-  }),
-  mounted () {
-    console.log(this.slug)
-  }
-}
+const endDate = slug + '-01'
+const startDate = format(addDays(new Date(endDate), 30), 'yyyy-MM-dd')
 </script>

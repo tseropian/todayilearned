@@ -1,21 +1,13 @@
 <template>
   <div>
-    <Menu />
-    <transition name="fade">
-      <nuxt />
-    </transition>
+    <!-- <Header /> -->
+    <slot />
     <Footer />
   </div>
 </template>
 
-<script>
-import Footer from '~/components/Footer'
-
-export default {
-  components: {
-    Footer
-  }
-}
+<script setup>
+// Components are auto-imported in Nuxt 3
 </script>
 
 <style>
@@ -23,7 +15,7 @@ export default {
 .fade-leave-active {
   transition: opacity 0.5s;
 }
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }
