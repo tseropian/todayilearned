@@ -83,7 +83,7 @@ onMounted(() => {
   overflow-wrap: break-word;
 }
 
-@media (max-width: 414px) {
+@media (max-width: 768px) {
   #list {
     padding: 10px;
     display: flex;

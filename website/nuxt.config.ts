@@ -1,7 +1,9 @@
+import { defineNuxtConfig } from 'nuxt/config'
+
 export default defineNuxtConfig({
   // https://nuxt.com/docs/api/configuration/nuxt-config
   devtools: { enabled: true },
-  
+  experimental: { appManifest: false },
   // Global page headers: https://nuxt.com/docs/api/configuration/nuxt-config#head
   app: {
     head: {

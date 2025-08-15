@@ -110,7 +110,7 @@ onMounted(() => {
 </script>
 
 <style>
-@media (max-width: 414px) {
+@media (max-width: 768px) {
   #home {
     padding: 10px;
     display: flex;
