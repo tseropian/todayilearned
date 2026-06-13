@@ -5,7 +5,7 @@ const { DynamoDB } = require('aws-sdk');
 
 const dynamodb = new DynamoDB.DocumentClient({ region: 'eu-west-1' });
 
-const TABLE_NAME = 'til-links-appsync';
+const TABLE_NAME = 'til-links-live';
 const OUTPUT_FILE = path.join(__dirname, 'wikipedia-links.csv');
 
 async function scanAllItems() {
