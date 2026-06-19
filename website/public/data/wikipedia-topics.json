@@ -1,0 +1,62 @@
+[
+  {
+    "topic": "Other",
+    "color": "#9ca3af",
+    "totalOccurrences": 8811,
+    "pageCount": 5464
+  },
+  {
+    "topic": "Sport",
+    "color": "#10b981",
+    "totalOccurrences": 1432,
+    "pageCount": 757
+  },
+  {
+    "topic": "Music",
+    "color": "#6366f1",
+    "totalOccurrences": 1348,
+    "pageCount": 787
+  },
+  {
+    "topic": "TV & Film",
+    "color": "#f59e0b",
+    "totalOccurrences": 701,
+    "pageCount": 395
+  },
+  {
+    "topic": "Geography",
+    "color": "#84cc16",
+    "totalOccurrences": 393,
+    "pageCount": 259
+  },
+  {
+    "topic": "History",
+    "color": "#ef4444",
+    "totalOccurrences": 262,
+    "pageCount": 172
+  },
+  {
+    "topic": "Technology",
+    "color": "#f97316",
+    "totalOccurrences": 76,
+    "pageCount": 50
+  },
+  {
+    "topic": "Politics",
+    "color": "#8b5cf6",
+    "totalOccurrences": 19,
+    "pageCount": 16
+  },
+  {
+    "topic": "Literature",
+    "color": "#3b82f6",
+    "totalOccurrences": 14,
+    "pageCount": 12
+  },
+  {
+    "topic": "Science",
+    "color": "#06b6d4",
+    "totalOccurrences": 7,
+    "pageCount": 5
+  }
+]

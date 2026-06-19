@@ -1,0 +1,80 @@
+{
+  "Music": [
+    "musician", "singer", "singer-songwriter", "band", "rock band", "metal band",
+    "punk band", "pop singer", "guitarist", "drummer", "vocalist", "rapper",
+    "disc jockey", "record producer", "music producer", "discography", "albums",
+    "album", "rock music", "heavy metal", "death metal", "black metal",
+    "progressive rock", "alternative rock", "indie rock", "post-rock",
+    "jazz", "blues", "hip hop", "hip-hop", "pop music", "punk rock",
+    "folk music", "electronic music", "dance music", "soul music",
+    "classical music", "opera", "musical group", "musical ensemble",
+    "music festival", "record label", "music genre", "american musician",
+    "english musician", "french musician", "british musician",
+    "american singer", "english singer", "american rapper"
+  ],
+  "TV & Film": [
+    "television series", "television show", "tv series", "film", "movie",
+    "cinema", "actor", "actress", "film director", "film producer",
+    "animated series", "animated film", "documentary", "miniseries",
+    "web series", "streaming", "comedy series", "drama series",
+    "american television", "british television", "french television",
+    "hbo series", "netflix", "amazon", "science fiction film",
+    "horror film", "thriller film", "action film", "romantic film",
+    "french film", "english-language film", "american film"
+  ],
+  "Sport": [
+    "basketball", "basketball player", "nba", "fiba",
+    "football player", "association football", "soccer", "fifa", "uefa",
+    "baseball", "ice hockey", "ice hockey player", "nhl",
+    "american football", "nfl", "tennis", "tennis player",
+    "rugby", "cricket", "golf", "athletics", "swimming",
+    "olympic", "olympics", "world cup", "championship",
+    "national team", "sports season", "sports competition",
+    "sporting event", "league", "tournament", "draft",
+    "playoff", "super bowl", "euro 20", "sports club",
+    "cycling", "boxing", "martial arts", "mma"
+  ],
+  "Literature": [
+    "novelist", "author", "writer", "poet", "literary",
+    "fiction", "novel", "short story", "poetry", "playwright",
+    "philosopher", "philosophy", "essayist", "biographer",
+    "science fiction writer", "fantasy writer", "crime fiction",
+    "american novelist", "french novelist", "english novelist",
+    "british novelist", "literary award", "booker prize", "pulitzer"
+  ],
+  "Geography": [
+    "city", "town", "village", "municipality", "borough",
+    "capital", "island", "mountain", "lake", "river",
+    "region", "district", "county", "province", "state",
+    "country", "nation", "continent", "ocean", "sea", "bay",
+    "neighbourhood", "suburb", "administrative division",
+    "populated place", "unincorporated community"
+  ],
+  "History": [
+    "historical", "revolution", "war", "battle", "empire",
+    "dynasty", "medieval", "ancient", "colonial", "history",
+    "historical event", "19th century", "20th century", "18th century",
+    "world war", "civil war", "independence", "colonialism",
+    "genocide", "holocaust", "era", "period", "age"
+  ],
+  "Science": [
+    "scientist", "biology", "physicist", "chemistry", "mathematician",
+    "astronomy", "medicine", "medical", "engineering",
+    "computer science", "neuroscience", "ecology", "genetics",
+    "zoology", "botany", "paleontology", "cosmology",
+    "physician", "academic", "research", "university professor"
+  ],
+  "Politics": [
+    "politician", "president", "prime minister", "political party",
+    "election", "government", "senator", "congressman",
+    "parliament", "minister", "mayor", "governor",
+    "political", "diplomacy", "ambassador", "head of state",
+    "head of government", "political movement", "ideology"
+  ],
+  "Technology": [
+    "software", "computing", "internet", "programming",
+    "artificial intelligence", "computer", "technology company",
+    "startup", "website", "app", "platform", "social media",
+    "video game", "game developer", "game studio"
+  ]
+}
