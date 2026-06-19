@@ -15,6 +15,9 @@
       </div>
 
       <div class="links">
+        <NuxtLink to="/visualisations" class="button--blue">
+          Visualisations
+        </NuxtLink>
         <a
           href="mailto:hello@todayilearned.cc"
           target="_blank"
