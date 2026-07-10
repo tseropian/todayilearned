@@ -29,7 +29,7 @@
 
 <script setup>
 const onClick = () => {
-  if (process.client) {
+  if (import.meta.client) {
     const checkbox = document.getElementById('luxbar-checkbox')
     const menu = document.getElementsByClassName('luxbar-menu')[0]
     if (checkbox) checkbox.checked = false

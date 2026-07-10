@@ -72,10 +72,6 @@ const years = computed(() => {
   return years.reverse()
 })
 
-const formatNumber = (nb) => {
-  return nb.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false })
-}
-
 const getDateRange = (year) => {
   const currentRange = dateRange.value.filter((f) => {
     const date = f.split('-')
