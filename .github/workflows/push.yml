@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+        cache: 'yarn'
+        cache-dependency-path: website/yarn.lock
+    - name: Enable Corepack
+      run: corepack enable
     - name: Build static site
       run: cd website && yarn install && yarn build && yarn generate
 
@@ -20,6 +27,13 @@ jobs:
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     steps:
     - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+        cache: 'yarn'
+        cache-dependency-path: website/yarn.lock
+    - name: Enable Corepack
+      run: corepack enable
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
