@@ -12,8 +12,6 @@
 </template>
 
 <script setup>
-import axios from 'axios'
-
 const props = defineProps({
   start: {
     type: String,
@@ -45,9 +43,8 @@ const generateDates = async () => {
 const getLinks = async (date) => {
   const config = useRuntimeConfig()
   const url = config.public.TIL_API_HOST + 'links/' + date
-  const response = await axios.get(url)
-  console.log('Links response:', response.data)
-  return response.data.result
+  const data = await $fetch(url)
+  return data.result
 }
 
 const getDate = (item) => {

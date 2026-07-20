@@ -1,0 +1,242 @@
+[
+  {
+    "title": "Kurt Vonnegut",
+    "url": "https://en.m.wikipedia.org/wiki/Kurt_Vonnegut",
+    "lang": "en",
+    "occurrences": 28,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "Iron Maiden",
+    "url": "https://en.wikipedia.org/wiki/Iron_Maiden",
+    "lang": "en",
+    "occurrences": 28,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "Succession (TV series)",
+    "url": "https://en.wikipedia.org/wiki/Succession_(TV_series)",
+    "lang": "en",
+    "occurrences": 26,
+    "topic": "TV & Film",
+    "color": "#f59e0b"
+  },
+  {
+    "title": "Metallica",
+    "url": "https://en.wikipedia.org/wiki/Metallica",
+    "lang": "en",
+    "occurrences": 19,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "Cult of Luna",
+    "url": "https://en.wikipedia.org/wiki/Cult_of_Luna",
+    "lang": "en",
+    "occurrences": 18,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "2023 FIBA Basketball World Cup",
+    "url": "https://en.wikipedia.org/wiki/2023_FIBA_Basketball_World_Cup",
+    "lang": "en",
+    "occurrences": 16,
+    "topic": "Sport",
+    "color": "#10b981"
+  },
+  {
+    "title": "2020 NBA playoffs",
+    "url": "https://en.wikipedia.org/wiki/2020_NBA_playoffs",
+    "lang": "en",
+    "occurrences": 16,
+    "topic": "Sport",
+    "color": "#10b981"
+  },
+  {
+    "title": "System of a Down",
+    "url": "https://en.wikipedia.org/wiki/System_of_a_Down",
+    "lang": "en",
+    "occurrences": 15,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "Ulver",
+    "url": "https://en.wikipedia.org/wiki/Ulver",
+    "lang": "en",
+    "occurrences": 15,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "La Folle Histoire de Max et Léon",
+    "url": "https://fr.wikipedia.org/wiki/La_Folle_Histoire_de_Max_et_L%C3%A9on",
+    "lang": "fr",
+    "occurrences": 14,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "Dua Lipa",
+    "url": "https://en.wikipedia.org/wiki/Dua_Lipa",
+    "lang": "en",
+    "occurrences": 14,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "Daft Punk",
+    "url": "https://en.wikipedia.org/wiki/Daft_Punk",
+    "lang": "en",
+    "occurrences": 13,
+    "topic": "Music",
+    "color": "#6366f1"
+  },
+  {
+    "title": "Upper Norwood",
+    "url": "https://en.wikipedia.org/wiki/Upper_Norwood",
+    "lang": "en",
+    "occurrences": 12,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "Gojira (band)",
+    "url": "https://en.wikipedia.org/wiki/Gojira_(band)",
+    "lang": "en",
+    "occurrences": 12,
+    "topic": "Music",
+    "color": "#6366f1"
+  },
+  {
+    "title": "Iron Maiden discography",
+    "url": "https://en.wikipedia.org/wiki/Iron_Maiden_discography",
+    "lang": "en",
+    "occurrences": 12,
+    "topic": "Music",
+    "color": "#6366f1"
+  },
+  {
+    "title": "Adolescence (TV series)",
+    "url": "https://en.wikipedia.org/wiki/Adolescence_(TV_series)",
+    "lang": "en",
+    "occurrences": 11,
+    "topic": "TV & Film",
+    "color": "#f59e0b"
+  },
+  {
+    "title": "United States men's national basketball team",
+    "url": "https://en.wikipedia.org/wiki/United_States_men%27s_national_basketball_team",
+    "lang": "en",
+    "occurrences": 11,
+    "topic": "Sport",
+    "color": "#10b981"
+  },
+  {
+    "title": "Guns N' Roses",
+    "url": "https://en.wikipedia.org/wiki/Guns_N%27_Roses",
+    "lang": "en",
+    "occurrences": 11,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "UEFA Euro 2020",
+    "url": "https://en.wikipedia.org/wiki/UEFA_Euro_2020",
+    "lang": "en",
+    "occurrences": 11,
+    "topic": "Sport",
+    "color": "#10b981"
+  },
+  {
+    "title": "The Last of Us",
+    "url": "https://en.wikipedia.org/wiki/The_Last_of_Us",
+    "lang": "en",
+    "occurrences": 11,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "Francis Ford Coppola",
+    "url": "https://en.wikipedia.org/wiki/Francis_Ford_Coppola",
+    "lang": "en",
+    "occurrences": 11,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "UEFA Euro 2024",
+    "url": "https://en.wikipedia.org/wiki/UEFA_Euro_2024",
+    "lang": "en",
+    "occurrences": 10,
+    "topic": "Sport",
+    "color": "#10b981"
+  },
+  {
+    "title": "Euphoria (American TV series)",
+    "url": "https://en.wikipedia.org/wiki/Euphoria_(American_TV_series)",
+    "lang": "en",
+    "occurrences": 10,
+    "topic": "TV & Film",
+    "color": "#f59e0b"
+  },
+  {
+    "title": "Black Audio Film Collective",
+    "url": "https://en.wikipedia.org/wiki/Black_Audio_Film_Collective",
+    "lang": "en",
+    "occurrences": 10,
+    "topic": "TV & Film",
+    "color": "#f59e0b"
+  },
+  {
+    "title": "Paradise Lost (band)",
+    "url": "https://en.wikipedia.org/wiki/Paradise_Lost_(band)",
+    "lang": "en",
+    "occurrences": 10,
+    "topic": "Music",
+    "color": "#6366f1"
+  },
+  {
+    "title": "Wildlife (film)",
+    "url": "https://en.wikipedia.org/wiki/Wildlife_(film)",
+    "lang": "en",
+    "occurrences": 10,
+    "topic": "TV & Film",
+    "color": "#f59e0b"
+  },
+  {
+    "title": "Diamanda Galás",
+    "url": "https://en.wikipedia.org/wiki/Diamanda_Gal%C3%A1s",
+    "lang": "en",
+    "occurrences": 10,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "Bambir",
+    "url": "https://en.wikipedia.org/wiki/Bambir",
+    "lang": "en",
+    "occurrences": 9,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "Le Tigre",
+    "url": "https://en.wikipedia.org/wiki/Le_Tigre",
+    "lang": "en",
+    "occurrences": 9,
+    "topic": "Other",
+    "color": "#9ca3af"
+  },
+  {
+    "title": "Wembley Stadium",
+    "url": "https://en.wikipedia.org/wiki/Wembley_Stadium",
+    "lang": "en",
+    "occurrences": 9,
+    "topic": "Sport",
+    "color": "#10b981"
+  }
+]
