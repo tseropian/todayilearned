@@ -27,7 +27,8 @@ export default defineNuxtConfig({
 
   // Modules: https://nuxt.com/docs/api/configuration/nuxt-config#modules
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxt/eslint'
   ],
 
   // Build Configuration
