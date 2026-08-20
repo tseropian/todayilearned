@@ -36,12 +36,35 @@
       </div>
       <TopPagesChart v-if="topPages && topPages.length" :pages="topPages" />
     </section>
+
+    <section class="section">
+      <h2>Category network</h2>
+      <p class="section-description">
+        Pages linked when they share Wikipedia categories. Node size is visit count;
+        colour is topic. Drag to explore, scroll to zoom, click a node to open its article.
+      </p>
+      <div class="legend">
+        <span
+          v-for="topic in topics"
+          :key="topic.topic"
+          class="legend-item"
+        >
+          <span class="legend-dot" :style="{ background: topic.color }" />
+          {{ topic.topic }}
+        </span>
+      </div>
+      <WikipediaNetworkGraph v-if="network && network.nodes && network.nodes.length" :nodes="network.nodes" :edges="network.edges" />
+    </section>
   </div>
 </template>
 
 <script setup>
-const { data: topics } = await useFetch('/data/wikipedia-topics.json', { default: () => [] })
-const { data: topPages } = await useFetch('/data/wikipedia-top-pages.json', { default: () => [] })
+// server: false — these are static public/data files fetched purely for the
+// ClientOnly charts below; the prerenderer's internal self-fetch to its own
+// public assets 404s, so fetch only once mounted in the browser instead.
+const { data: topics } = await useFetch('/data/wikipedia-topics.json', { server: false, default: () => [] })
+const { data: topPages } = await useFetch('/data/wikipedia-top-pages.json', { server: false, default: () => [] })
+const { data: network } = await useFetch('/data/wikipedia-network.json', { server: false, default: () => ({ nodes: [], edges: [] }) })
 
 const totalOccurrences = computed(() =>
   (topics.value || []).reduce((sum, t) => sum + t.totalOccurrences, 0),

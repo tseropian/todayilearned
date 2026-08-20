@@ -8,6 +8,31 @@ const TOPIC_CATEGORIES_FILE = path.join(__dirname, 'topic-categories.json');
 const OUTPUT_DIR = path.join(__dirname, '..', 'website', 'public', 'data');
 
 const TOP_PAGES_LIMIT = 30;
+const NETWORK_MIN_OCCURRENCES = 2;
+const NETWORK_MAX_CATEGORY_CLUSTER_SIZE = 40;
+const NETWORK_TOP_CATEGORIES_LIMIT = 5;
+
+// Wikipedia maintenance/meta categories and generic demographic buckets that
+// don't signal genuine topical similarity between pages.
+const GENERIC_CATEGORY_PATTERNS = [
+  /^living people$/i,
+  /^\d{4}s?\s+(births|deaths)$/i,
+  /^\d{4}\s+(establishments|disestablishments)\b/i,
+  /^articles? (with|needing|lacking|using|containing)/i,
+  /^all (articles|wikipedia articles)/i,
+  /^pages using/i,
+  /^short description/i,
+  /^use (mdy|dmy|british|american) /i,
+  /^cs1\b/i,
+  /^webarchive template/i,
+  /^commons category/i,
+  /^wikipedia articles (with|needing)/i,
+  /identifiers$/i,
+  /^featured articles$/i,
+  /^good articles$/i,
+  /^wikidata/i,
+  /^biography with signature$/i,
+];
 
 const TOPIC_COLORS = {
   Music: '#6366f1',
@@ -178,6 +203,68 @@ function buildTopPagesData(entries) {
   }));
 }
 
+function isGenericCategory(category) {
+  return GENERIC_CATEGORY_PATTERNS.some((pattern) => pattern.test(category));
+}
+
+// Nested map avoids ever concatenating two titles into a single string key,
+// which is unsafe since titles themselves contain spaces/punctuation.
+function addEdgeWeight(edgeWeights, titleA, titleB) {
+  const [a, b] = titleA < titleB ? [titleA, titleB] : [titleB, titleA];
+  if (!edgeWeights.has(a)) edgeWeights.set(a, new Map());
+  const inner = edgeWeights.get(a);
+  inner.set(b, (inner.get(b) || 0) + 1);
+}
+
+function buildNetworkData(entries) {
+  const nodeEntries = entries.filter((e) => e.occurrences >= NETWORK_MIN_OCCURRENCES);
+
+  // The same title can exist as separate pages in different languages
+  // (e.g. English and French "Paris"); a graph node id must be unique, so
+  // key on lang+title rather than the display title alone.
+  const nodeKey = (e) => `${e.lang}::${e.title}`;
+
+  const categoryToKeys = new Map();
+  for (const entry of nodeEntries) {
+    for (const category of (entry.categories || [])) {
+      if (isGenericCategory(category)) continue;
+      if (!categoryToKeys.has(category)) categoryToKeys.set(category, []);
+      categoryToKeys.get(category).push(nodeKey(entry));
+    }
+  }
+
+  const edgeWeights = new Map();
+  for (const keys of categoryToKeys.values()) {
+    if (keys.length < 2 || keys.length > NETWORK_MAX_CATEGORY_CLUSTER_SIZE) continue;
+    for (let i = 0; i < keys.length; i += 1) {
+      for (let j = i + 1; j < keys.length; j += 1) {
+        addEdgeWeight(edgeWeights, keys[i], keys[j]);
+      }
+    }
+  }
+
+  const edges = [];
+  for (const [source, targets] of edgeWeights.entries()) {
+    for (const [target, weight] of targets.entries()) {
+      edges.push({ source, target, weight });
+    }
+  }
+
+  const nodes = nodeEntries.map((e) => ({
+    id: nodeKey(e),
+    label: e.title,
+    url: e.url,
+    topic: e.topic,
+    color: TOPIC_COLORS[e.topic] || TOPIC_COLORS.Other,
+    occurrences: e.occurrences,
+    topCategories: (e.categories || [])
+      .filter((c) => !isGenericCategory(c))
+      .slice(0, NETWORK_TOP_CATEGORIES_LIMIT),
+  }));
+
+  return { nodes, edges };
+}
+
 function main() {
   let topicMap = null;
   if (fs.existsSync(TOPIC_CATEGORIES_FILE)) {
@@ -207,6 +294,11 @@ function main() {
   const topPagesFile = path.join(OUTPUT_DIR, 'wikipedia-top-pages.json');
   fs.writeFileSync(topPagesFile, JSON.stringify(topPagesData, null, 2));
   console.log(`Wrote ${topPagesData.length} top pages to ${topPagesFile}`);
+
+  const networkData = buildNetworkData(entries);
+  const networkFile = path.join(OUTPUT_DIR, 'wikipedia-network.json');
+  fs.writeFileSync(networkFile, JSON.stringify(networkData, null, 2));
+  console.log(`Wrote ${networkData.nodes.length} nodes and ${networkData.edges.length} edges to ${networkFile}`);
 
   console.log('\nTopic summary:');
   for (const t of topicsData) {

@@ -1,62 +1,62 @@
 [
   {
-    "topic": "Other",
-    "color": "#9ca3af",
-    "totalOccurrences": 8811,
-    "pageCount": 5464
+    "topic": "Music",
+    "color": "#6366f1",
+    "totalOccurrences": 4450,
+    "pageCount": 2472
   },
   {
     "topic": "Sport",
     "color": "#10b981",
-    "totalOccurrences": 1432,
-    "pageCount": 757
+    "totalOccurrences": 2749,
+    "pageCount": 1532
   },
   {
-    "topic": "Music",
-    "color": "#6366f1",
-    "totalOccurrences": 1348,
-    "pageCount": 787
+    "topic": "Other",
+    "color": "#9ca3af",
+    "totalOccurrences": 2245,
+    "pageCount": 1593
   },
   {
     "topic": "TV & Film",
     "color": "#f59e0b",
-    "totalOccurrences": 701,
-    "pageCount": 395
+    "totalOccurrences": 1673,
+    "pageCount": 941
   },
   {
     "topic": "Geography",
     "color": "#84cc16",
-    "totalOccurrences": 393,
-    "pageCount": 259
+    "totalOccurrences": 1169,
+    "pageCount": 821
   },
   {
     "topic": "History",
     "color": "#ef4444",
-    "totalOccurrences": 262,
-    "pageCount": 172
-  },
-  {
-    "topic": "Technology",
-    "color": "#f97316",
-    "totalOccurrences": 76,
-    "pageCount": 50
-  },
-  {
-    "topic": "Politics",
-    "color": "#8b5cf6",
-    "totalOccurrences": 19,
-    "pageCount": 16
+    "totalOccurrences": 438,
+    "pageCount": 323
   },
   {
     "topic": "Literature",
     "color": "#3b82f6",
-    "totalOccurrences": 14,
-    "pageCount": 12
+    "totalOccurrences": 309,
+    "pageCount": 213
+  },
+  {
+    "topic": "Technology",
+    "color": "#f97316",
+    "totalOccurrences": 22,
+    "pageCount": 16
   },
   {
     "topic": "Science",
     "color": "#06b6d4",
-    "totalOccurrences": 7,
-    "pageCount": 5
+    "totalOccurrences": 4,
+    "pageCount": 3
+  },
+  {
+    "topic": "Politics",
+    "color": "#8b5cf6",
+    "totalOccurrences": 4,
+    "pageCount": 3
   }
 ]
