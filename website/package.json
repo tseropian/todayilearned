@@ -10,21 +10,29 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint:js": "eslint .",
-    "lint": "yarn lint:js"
+    "lint": "pnpm lint:js"
   },
   "dependencies": {
-    "@nuxtjs/tailwindcss": "^6.14.0",
-    "date-fns": "^3.6.0",
-    "echarts": "^5.6.0",
-    "nuxt": "^3.21.8",
+    "@nuxt/content": "^2.12.1",
+    "@nuxtjs/tailwindcss": "^6.11.4",
+    "axios": "^1.6.7",
+    "date-fns": "^3.3.1",
+    "echarts": "^5.5.1",
+    "nuxt": "^3.10.3",
     "vue-echarts": "^7.0.3"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^1.16.0",
-    "@types/node": "^24.0.0",
+    "@nuxt/eslint": "^1.17.0",
+    "@types/node": "^20.11.24",
     "eslint": "^9.0.0",
-    "postcss": "^8.5.16",
-    "typescript": "^5.8.3"
+    "postcss": "^8.4.35",
+    "typescript": "^5.3.3"
   },
-  "packageManager": "yarn@4.17.1"
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "vue-demi"
+    ]
+  }
 }
