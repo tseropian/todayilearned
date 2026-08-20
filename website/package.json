@@ -9,7 +9,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
+    "lint:js": "eslint .",
     "lint": "pnpm lint:js"
   },
   "dependencies": {
@@ -22,13 +22,17 @@
     "vue-echarts": "^7.0.3"
   },
   "devDependencies": {
-    "@nuxt/eslint-config": "^0.2.0",
+    "@nuxt/eslint": "^1.17.0",
     "@types/node": "^20.11.24",
-    "eslint": "^8.57.0",
+    "eslint": "^9.0.0",
     "postcss": "^8.4.35",
     "typescript": "^5.3.3"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["@parcel/watcher", "esbuild", "vue-demi"]
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "vue-demi"
+    ]
   }
 }
