@@ -1,5 +1,8 @@
 <template>
   <div id="list">
+    <p v-if="loadError" class="load-error">
+      Could not load links from the API.
+    </p>
     <div v-for="(item, index) in links" :key="index" class="single-day">
       <p>{{ getDate(item) }}</p>
       <ul id="links-per-day">
@@ -12,6 +15,8 @@
 </template>
 
 <script setup>
+import { eachDayOfInterval, parseISO, format } from 'date-fns'
+
 const props = defineProps({
   start: {
     type: String,
@@ -23,26 +28,30 @@ const props = defineProps({
   }
 })
 
-const dates = ref([])
 const links = ref([])
+const loadError = ref(false)
 
 const generateDates = async () => {
-  const dateMove = new Date(props.end)
-  let strDate = props.end
-  while (strDate < props.start) {
-    strDate = dateMove.toISOString().slice(0, 10)
-    dates.value.push(strDate)
-    dateMove.setDate(dateMove.getDate() + 1)
-  }
-  dates.value.reverse()
+  loadError.value = false
+  try {
+    const dates = eachDayOfInterval({
+      start: parseISO(props.end),
+      end: parseISO(props.start)
+    }).map(day => format(day, 'yyyy-MM-dd')).reverse()
 
-  const linksByDate = await getLinks(dates.value.join(','))
-  links.value = linksByDate.filter(l => l.length > 0)
+    const linksByDate = await getLinks(dates.join(','))
+    links.value = (linksByDate || []).filter(l => l.length > 0)
+  } catch (err) {
+    console.error('Failed to load links', err)
+    loadError.value = true
+    links.value = []
+  }
 }
 
 const getLinks = async (date) => {
   const config = useRuntimeConfig()
-  const url = config.public.TIL_API_HOST + 'links/' + date
+  const host = String(config.public.TIL_API_HOST || '').replace(/\/?$/, '/')
+  const url = host + 'links/' + date
   const data = await $fetch(url)
   return data.result
 }
@@ -68,6 +77,11 @@ onMounted(() => {
 </script>
 
 <style>
+.load-error {
+  grid-column: 1 / -1;
+  color: #b45309;
+}
+
 .single-day {
   overflow: hidden;
   margin-bottom: 20px;

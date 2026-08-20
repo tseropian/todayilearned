@@ -28,3 +28,4 @@ functions:
       - http:
           path: links/{date}
           method: get
+          cors: true

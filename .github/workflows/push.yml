@@ -15,16 +15,19 @@ jobs:
       with:
         version: 10
     - name: Configure AWS Credentials
+      if: github.event_name == 'push'
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: eu-west-1
     - name: Create env file for website
-      run: |
-        touch .env
-        echo TIL_API_HOST =${{ secrets.TIL_API_HOST }} >> ./website/.env
+      run: echo "TIL_API_HOST=${{ secrets.TIL_API_HOST }}" >> ./website/.env
     - name: Build static site
       run: cd website && pnpm install && pnpm build && pnpm generate
     - name: Deploy static site to S3 bucket
+      if: github.event_name == 'push'
       run: aws s3 sync ./website/.output/public/ s3://todayilearned-prod --delete
+    - name: Invalidate CloudFront
+      if: github.event_name == 'push'
+      run: aws cloudfront create-invalidation --distribution-id E2ZHK788PNYRR5 --paths "/*"

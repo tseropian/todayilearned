@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     // Private keys are only available on server-side
     // Public keys that are exposed to client-side
     public: {
-      TIL_API_HOST: process.env.TIL_API_HOST || 'https://api.todayilearned.cc/'
+      TIL_API_HOST: process.env.TIL_API_HOST || 'https://pzbugc7ro1.execute-api.eu-west-1.amazonaws.com/dev/'
     }
   }
 })
