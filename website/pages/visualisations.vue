@@ -120,8 +120,8 @@ const totalPages = computed(() =>
 }
 
 #visualisations .section {
-  max-width: 960px;
-  margin: 0 auto 56px;
+  max-width: 100%;
+  margin: 0 0 56px;
 }
 
 #visualisations .section h2 {
