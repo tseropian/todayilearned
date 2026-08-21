@@ -5,7 +5,6 @@
         :option="chartOption"
         :style="{ height: '640px', width: '100%' }"
         autoresize
-        @click="onNodeClick"
       />
       <template #fallback>
         <div class="chart-placeholder">Loading chart…</div>
@@ -43,6 +42,7 @@ const symbolSizeScale = computed(() => {
 const chartOption = computed(() => ({
   tooltip: {
     enterable: true,
+    triggerOn: 'click',
     formatter: (info) => {
       if (info.dataType !== 'node') return ''
       const node = info.data
@@ -53,10 +53,18 @@ const chartOption = computed(() => ({
             title="${categories.replace(/"/g, '&quot;')}"
           >?</span>`
         : ''
-      return `<strong>${node.name}</strong> ${categoriesIcon}<br/>
+      const linkIcon = node.url
+        ? `<a
+            class="wikipedia-link-icon"
+            href="${node.url}"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open Wikipedia page"
+          >🔗</a>`
+        : ''
+      return `<strong>${node.name}</strong> ${categoriesIcon} ${linkIcon}<br/>
         Topic: ${node.topic}<br/>
-        ${node.occurrences} occurrences<br/>
-        <em style="color:#94a3b8">Click to open Wikipedia</em>`
+        ${node.occurrences} occurrences`
     },
   },
   series: [
@@ -65,6 +73,7 @@ const chartOption = computed(() => ({
       layout: 'force',
       roam: true,
       draggable: true,
+      selectedMode: 'single',
       force: {
         repulsion: 40,
         edgeLength: [15, 70],
@@ -80,6 +89,12 @@ const chartOption = computed(() => ({
       emphasis: {
         focus: 'adjacency',
         label: { show: true, color: '#e2e8f0', fontSize: 11 },
+        lineStyle: { opacity: 0.6 },
+      },
+      select: {
+        focus: 'adjacency',
+        label: { show: true, color: '#e2e8f0', fontSize: 11 },
+        itemStyle: { borderColor: '#e2e8f0', borderWidth: 1.5 },
         lineStyle: { opacity: 0.6 },
       },
       data: props.nodes.map((n) => ({
@@ -101,12 +116,6 @@ const chartOption = computed(() => ({
   ],
   backgroundColor: 'transparent',
 }))
-
-function onNodeClick(params) {
-  if (params.dataType === 'node' && params.data && params.data.url) {
-    window.open(params.data.url, '_blank', 'noopener,noreferrer')
-  }
-}
 </script>
 
 <style scoped>
@@ -143,5 +152,15 @@ function onNodeClick(params) {
   line-height: 1;
   color: #94a3b8;
   cursor: help;
+}
+
+.wikipedia-link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>
