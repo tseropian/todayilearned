@@ -20,8 +20,11 @@ function sleep(ms) {
 }
 
 function httpsGet(url) {
+  const options = {
+    headers: { 'User-Agent': 'todayilearned-visualisations/1.0 (https://github.com/tseropian/todayilearned)' },
+  };
   return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
+    https.get(url, options, (res) => {
       let data = '';
       res.on('data', (chunk) => { data += chunk; });
       res.on('end', () => {
@@ -115,16 +118,31 @@ async function saveToCache(items) {
 async function fetchWikipediaCategories(titles) {
   const results = {};
   const encodedTitles = titles.map(encodeURIComponent).join('|');
-  const url = `${WIKIPEDIA_API_BASE}?action=query&prop=categories&cllimit=max&format=json&titles=${encodedTitles}&origin=*`;
 
-  const data = await httpsGet(url);
-  const pages = (data.query || {}).pages || {};
+  // cllimit=max caps the total number of category rows returned across the
+  // *whole* batch response, not per title, so once a few category-heavy
+  // pages exhaust it the remaining titles in the batch come back with no
+  // categories at all. Follow `continue.clcontinue` until MediaWiki reports
+  // there's nothing left, accumulating categories per title across pages.
+  let clcontinue;
+  let guard = 0;
+  do {
+    let url = `${WIKIPEDIA_API_BASE}?action=query&prop=categories&cllimit=max&format=json&titles=${encodedTitles}&origin=*`;
+    if (clcontinue) url += `&clcontinue=${encodeURIComponent(clcontinue)}`;
 
-  for (const page of Object.values(pages)) {
-    const { title } = page;
-    const categories = (page.categories || []).map((c) => c.title.replace(/^Category:/, ''));
-    results[title] = categories;
-  }
+    const data = await httpsGet(url);
+    const pages = (data.query || {}).pages || {};
+
+    for (const page of Object.values(pages)) {
+      const { title } = page;
+      const categories = (page.categories || []).map((c) => c.title.replace(/^Category:/, ''));
+      results[title] = (results[title] || []).concat(categories);
+    }
+
+    clcontinue = data.continue && data.continue.clcontinue;
+    guard += 1;
+  } while (clcontinue && guard < 30);
+
   return results;
 }
 

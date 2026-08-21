@@ -4,16 +4,16 @@
     "url": "https://en.m.wikipedia.org/wiki/Kurt_Vonnegut",
     "lang": "en",
     "occurrences": 28,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "TV & Film",
+    "color": "#f59e0b"
   },
   {
     "title": "Iron Maiden",
     "url": "https://en.wikipedia.org/wiki/Iron_Maiden",
     "lang": "en",
     "occurrences": 28,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "Music",
+    "color": "#6366f1"
   },
   {
     "title": "Succession (TV series)",
@@ -28,16 +28,16 @@
     "url": "https://en.wikipedia.org/wiki/Metallica",
     "lang": "en",
     "occurrences": 19,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "Music",
+    "color": "#6366f1"
   },
   {
     "title": "Cult of Luna",
     "url": "https://en.wikipedia.org/wiki/Cult_of_Luna",
     "lang": "en",
     "occurrences": 18,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "Music",
+    "color": "#6366f1"
   },
   {
     "title": "2023 FIBA Basketball World Cup",
@@ -60,16 +60,16 @@
     "url": "https://en.wikipedia.org/wiki/System_of_a_Down",
     "lang": "en",
     "occurrences": 15,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "Music",
+    "color": "#6366f1"
   },
   {
     "title": "Ulver",
     "url": "https://en.wikipedia.org/wiki/Ulver",
     "lang": "en",
     "occurrences": 15,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "Music",
+    "color": "#6366f1"
   },
   {
     "title": "La Folle Histoire de Max et Léon",
@@ -84,8 +84,8 @@
     "url": "https://en.wikipedia.org/wiki/Dua_Lipa",
     "lang": "en",
     "occurrences": 14,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "Music",
+    "color": "#6366f1"
   },
   {
     "title": "Daft Punk",
@@ -100,8 +100,8 @@
     "url": "https://en.wikipedia.org/wiki/Upper_Norwood",
     "lang": "en",
     "occurrences": 12,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "Geography",
+    "color": "#84cc16"
   },
   {
     "title": "Gojira (band)",
@@ -140,8 +140,8 @@
     "url": "https://en.wikipedia.org/wiki/Guns_N%27_Roses",
     "lang": "en",
     "occurrences": 11,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "Music",
+    "color": "#6366f1"
   },
   {
     "title": "UEFA Euro 2020",
@@ -156,16 +156,16 @@
     "url": "https://en.wikipedia.org/wiki/The_Last_of_Us",
     "lang": "en",
     "occurrences": 11,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "TV & Film",
+    "color": "#f59e0b"
   },
   {
     "title": "Francis Ford Coppola",
     "url": "https://en.wikipedia.org/wiki/Francis_Ford_Coppola",
     "lang": "en",
     "occurrences": 11,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "Music",
+    "color": "#6366f1"
   },
   {
     "title": "UEFA Euro 2024",
@@ -212,6 +212,14 @@
     "url": "https://en.wikipedia.org/wiki/Diamanda_Gal%C3%A1s",
     "lang": "en",
     "occurrences": 10,
+    "topic": "Music",
+    "color": "#6366f1"
+  },
+  {
+    "title": "Baron noir",
+    "url": "https://fr.wikipedia.org/wiki/Baron_noir",
+    "lang": "fr",
+    "occurrences": 9,
     "topic": "Other",
     "color": "#9ca3af"
   },
@@ -220,23 +228,15 @@
     "url": "https://en.wikipedia.org/wiki/Bambir",
     "lang": "en",
     "occurrences": 9,
-    "topic": "Other",
-    "color": "#9ca3af"
+    "topic": "Music",
+    "color": "#6366f1"
   },
   {
     "title": "Le Tigre",
     "url": "https://en.wikipedia.org/wiki/Le_Tigre",
     "lang": "en",
     "occurrences": 9,
-    "topic": "Other",
-    "color": "#9ca3af"
-  },
-  {
-    "title": "Wembley Stadium",
-    "url": "https://en.wikipedia.org/wiki/Wembley_Stadium",
-    "lang": "en",
-    "occurrences": 9,
-    "topic": "Sport",
-    "color": "#10b981"
+    "topic": "Music",
+    "color": "#6366f1"
   }
 ]
