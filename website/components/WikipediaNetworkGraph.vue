@@ -42,14 +42,20 @@ const symbolSizeScale = computed(() => {
 
 const chartOption = computed(() => ({
   tooltip: {
+    enterable: true,
     formatter: (info) => {
       if (info.dataType !== 'node') return ''
       const node = info.data
       const categories = (node.topCategories || []).join(', ')
-      return `<strong>${node.name}</strong><br/>
+      const categoriesIcon = categories
+        ? `<span
+            class="category-hint"
+            title="${categories.replace(/"/g, '&quot;')}"
+          >?</span>`
+        : ''
+      return `<strong>${node.name}</strong> ${categoriesIcon}<br/>
         Topic: ${node.topic}<br/>
         ${node.occurrences} occurrences<br/>
-        ${categories ? `${categories}<br/>` : ''}
         <em style="color:#94a3b8">Click to open Wikipedia</em>`
     },
   },
@@ -119,5 +125,23 @@ function onNodeClick(params) {
   color: #94a3b8;
   background: #0f172a;
   border-radius: 8px;
+}
+</style>
+
+<style>
+/* Unscoped: ECharts renders the tooltip in a floating div outside this
+   component's DOM, so scoped styles never reach it. */
+.category-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #64748b;
+  border-radius: 50%;
+  font-size: 10px;
+  line-height: 1;
+  color: #94a3b8;
+  cursor: help;
 }
 </style>
