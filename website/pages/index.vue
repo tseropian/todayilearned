@@ -18,6 +18,8 @@
         <NuxtLink to="/visualisations" class="button--blue">
           Visualisations
         </NuxtLink>
+      </div>
+      <div class="links links--secondary">
         <a
           href="mailto:hello@todayilearned.cc"
           target="_blank"
@@ -221,6 +223,10 @@ onMounted(() => {
   text-align: center;
   padding: 12px 24px;
   box-sizing: border-box;
+}
+
+.links--secondary {
+  margin-top: 10px;
 }
 
 #caption h2 {
