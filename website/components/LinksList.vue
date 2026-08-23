@@ -1,5 +1,6 @@
 <template>
   <div id="list">
+    <Spinner v-if="loading" class="list-loading" label="Loading links…" />
     <p v-if="loadError" class="load-error">
       Could not load links from the API.
     </p>
@@ -30,9 +31,11 @@ const props = defineProps({
 
 const links = ref([])
 const loadError = ref(false)
+const loading = ref(false)
 
 const generateDates = async () => {
   loadError.value = false
+  loading.value = true
   try {
     const dates = eachDayOfInterval({
       start: parseISO(props.end),
@@ -45,6 +48,8 @@ const generateDates = async () => {
     console.error('Failed to load links', err)
     loadError.value = true
     links.value = []
+  } finally {
+    loading.value = false
   }
 }
 
@@ -77,6 +82,10 @@ onMounted(() => {
 </script>
 
 <style>
+.list-loading {
+  grid-column: 1 / -1;
+}
+
 .load-error {
   grid-column: 1 / -1;
   color: #b45309;
