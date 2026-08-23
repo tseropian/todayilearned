@@ -16,7 +16,8 @@
         Run <code>node tools/fetch-wikipedia-metadata.js</code> then
         <code>node tools/build-visualisation-data.js</code> to regenerate with full Wikipedia category data.
       </p>
-      <TopicTreemap v-if="topics && topics.length" :topics="topics" />
+      <Spinner v-if="topicsPending" label="Loading topics…" />
+      <TopicTreemap v-else-if="topics && topics.length" :topics="topics" />
     </section>
 
     <section class="section">
@@ -34,7 +35,8 @@
           {{ topic.topic }}
         </span>
       </div>
-      <TopPagesChart v-if="topPages && topPages.length" :pages="topPages" />
+      <Spinner v-if="topPagesPending" label="Loading pages…" />
+      <TopPagesChart v-else-if="topPages && topPages.length" :pages="topPages" />
     </section>
 
     <section class="section">
@@ -53,7 +55,8 @@
           {{ topic.topic }}
         </span>
       </div>
-      <WikipediaNetworkGraph v-if="network && network.nodes && network.nodes.length" :nodes="network.nodes" :edges="network.edges" />
+      <Spinner v-if="networkPending" label="Loading network…" />
+      <WikipediaNetworkGraph v-else-if="network && network.nodes && network.nodes.length" :nodes="network.nodes" :edges="network.edges" />
     </section>
   </div>
 </template>
@@ -62,9 +65,9 @@
 // server: false — these are static public/data files fetched purely for the
 // ClientOnly charts below; the prerenderer's internal self-fetch to its own
 // public assets 404s, so fetch only once mounted in the browser instead.
-const { data: topics } = await useFetch('/data/wikipedia-topics.json', { server: false, default: () => [] })
-const { data: topPages } = await useFetch('/data/wikipedia-top-pages.json', { server: false, default: () => [] })
-const { data: network } = await useFetch('/data/wikipedia-network.json', { server: false, default: () => ({ nodes: [], edges: [] }) })
+const { data: topics, pending: topicsPending } = await useFetch('/data/wikipedia-topics.json', { server: false, default: () => [] })
+const { data: topPages, pending: topPagesPending } = await useFetch('/data/wikipedia-top-pages.json', { server: false, default: () => [] })
+const { data: network, pending: networkPending } = await useFetch('/data/wikipedia-network.json', { server: false, default: () => ({ nodes: [], edges: [] }) })
 
 const totalOccurrences = computed(() =>
   (topics.value || []).reduce((sum, t) => sum + t.totalOccurrences, 0),
@@ -163,6 +166,16 @@ const totalPages = computed(() =>
   align-items: center;
   gap: 6px;
   font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+/* Retune the spinner for the dark data panels */
+#visualisations .spinner__ring {
+  border-color: var(--ink-border);
+  border-top-color: var(--ink-accent);
+}
+
+#visualisations .spinner__label {
   color: var(--ink-muted);
 }
 
