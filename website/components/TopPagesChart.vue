@@ -36,20 +36,20 @@ const chartOption = computed(() => {
         return `<strong>${page.title}</strong><br/>
           Topic: ${page.topic}<br/>
           ${page.occurrences} occurrences<br/>
-          <em style="color:#94a3b8">Click to open Wikipedia</em>`
+          <em style="color:#a49fb0">Click to open Wikipedia</em>`
       },
     },
     grid: { left: '2%', right: '6%', bottom: '2%', containLabel: true },
     xAxis: {
       type: 'value',
-      axisLabel: { color: '#94a3b8' },
-      splitLine: { lineStyle: { color: '#1e293b' } },
+      axisLabel: { color: '#a49fb0' },
+      splitLine: { lineStyle: { color: '#302d3b' } },
     },
     yAxis: {
       type: 'category',
       data: sorted.map((p) => p.title),
       axisLabel: {
-        color: '#e2e8f0',
+        color: '#ece8f1',
         fontSize: 12,
         width: 220,
         overflow: 'truncate',
@@ -66,7 +66,7 @@ const chartOption = computed(() => {
         label: {
           show: true,
           position: 'right',
-          color: '#94a3b8',
+          color: '#a49fb0',
           fontSize: 11,
         },
       },
@@ -84,7 +84,7 @@ function onBarClick(params) {
 
 <style scoped>
 .bar-chart-container {
-  background: #0f172a;
+  background: var(--ink-surface);
   border-radius: 8px;
   overflow: hidden;
   padding: 8px;
@@ -96,8 +96,8 @@ function onBarClick(params) {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #94a3b8;
-  background: #0f172a;
+  color: #a49fb0;
+  background: var(--ink-surface);
   border-radius: 8px;
 }
 </style>

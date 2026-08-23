@@ -1,15 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+@import './tokens.css';
+
 body {
-  color: #26261C;
-  /* font-family: 'Montserrat', sans-serif; */
-  font-family: 'Roboto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  letter-spacing: 0.02em;
   text-align: center;
 }
-
 
 #home {
   margin: 1em;
@@ -17,11 +10,11 @@ body {
 
 h1 {
   font-size: 3em;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 #caption {
-  vertical-align:top; 
+  vertical-align:top;
   float: left;
   width:22%;
 }
@@ -44,8 +37,9 @@ h1 {
   width: auto;
   /* display: inline-block; */
   display: inline-grid;
-  background: #D8D9D7;
-  border-radius: 0.3em;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   padding: 0.5em 1em;
 }
 
@@ -62,63 +56,70 @@ h1 {
   margin-bottom: 0.5em;
   margin-right: 1em;
   /* display: inline; */
-  background: #26261C;
+  background: var(--ink);
   width: 16em;
-  border-radius: 0.3em;
+  border-radius: var(--radius-sm);
   list-style-type: none;
 }
 
 .single-day a{
-  color: #D8D9D7;
+  color: var(--surface-2);
 }
 .single-day a:visited {
-  color: #D8D9D7;
+  color: var(--surface-2);
 }
 
 .single-day p {
-  font-weight: bold;
-  font-size: 2em; 
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2em;
   margin-top: 0;
+  color: var(--ink-soft);
 }
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
-
+/* Buttons: one filled primary + neutral outline variants sharing a shape */
+.button--green,
+.button--grey,
 .button--blue {
   display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #2563eb;
-  color: #2563eb;
+  border-radius: var(--radius-sm);
   text-decoration: none;
-  padding: 10px 30px;
+  padding: 10px 24px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Primary — Visualisations */
+.button--blue {
+  border: 1px solid var(--accent);
+  background-color: var(--accent);
+  color: var(--on-accent);
 }
 .button--blue:hover {
-  color: #fff;
-  background-color: #2563eb;
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+/* Secondary — Contact */
+.button--green {
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+.button--green:hover {
+  border-color: var(--ink);
+  background-color: var(--surface-2);
+}
+
+/* Secondary — GitHub */
+.button--grey {
+  border: 1px solid var(--border);
+  color: var(--ink);
+  margin-left: 0;
+}
+.button--grey:hover {
+  border-color: var(--ink);
+  background-color: var(--surface-2);
 }
 
 .archive-link {

@@ -78,11 +78,11 @@ const totalPages = computed(() =>
 <style>
 #visualisations {
   min-height: 100vh;
-  background: #0f172a;
+  background: var(--ink-bg);
   max-width: 100%;
   padding: 32px 24px 64px;
-  font-family: 'Helvetica Neue', sans-serif;
-  color: #e2e8f0;
+  font-family: var(--font-body);
+  color: var(--ink-text);
   text-align: left;
 }
 
@@ -93,7 +93,7 @@ const totalPages = computed(() =>
 
 #visualisations .back-link {
   display: inline-block;
-  color: #94a3b8;
+  color: var(--ink-muted);
   text-decoration: none;
   font-size: 14px;
   margin-bottom: 16px;
@@ -101,19 +101,20 @@ const totalPages = computed(() =>
 }
 
 #visualisations .back-link:hover {
-  color: #e2e8f0;
+  color: var(--ink-text);
 }
 
 #visualisations h1 {
-  font-size: 2rem;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #f1f5f9;
+  color: #fff;
   margin: 0 0 8px;
   text-align: left;
 }
 
 #visualisations .subtitle {
-  color: #94a3b8;
+  color: var(--ink-muted);
   font-size: 1rem;
   margin: 0;
   text-align: left;
@@ -125,15 +126,16 @@ const totalPages = computed(() =>
 }
 
 #visualisations .section h2 {
-  font-size: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
   font-weight: 600;
-  color: #f1f5f9;
+  color: #fff;
   margin: 0 0 8px;
   text-align: left;
 }
 
 #visualisations .section-description {
-  color: #64748b;
+  color: var(--ink-muted);
   font-size: 0.875rem;
   margin: 0 0 16px;
   line-height: 1.6;
@@ -141,11 +143,12 @@ const totalPages = computed(() =>
 }
 
 #visualisations .section-description code {
-  background: #1e293b;
+  font-family: var(--font-mono);
+  background: var(--ink-elevated);
   border-radius: 4px;
   padding: 1px 5px;
   font-size: 0.8rem;
-  color: #93c5fd;
+  color: var(--ink-accent);
 }
 
 #visualisations .legend {
@@ -160,7 +163,7 @@ const totalPages = computed(() =>
   align-items: center;
   gap: 6px;
   font-size: 0.8rem;
-  color: #94a3b8;
+  color: var(--ink-muted);
 }
 
 #visualisations .legend-dot {

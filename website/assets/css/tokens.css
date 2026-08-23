@@ -1,0 +1,74 @@
+/* ==========================================================================
+   Today I Learned — design tokens
+   "Paper & Ink" : a warm-paper light UI and a matching warm-charcoal "ink"
+   surface for data panels, unified by one indigo accent and a single type
+   pairing (Fraunces display / Inter body / JetBrains Mono code).
+   Change a value here and it propagates across the whole site.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Type */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Light "paper" surfaces */
+  --paper: #faf7f2;
+  --surface: #ffffff;
+  --surface-2: #f1ece3;
+  --ink: #211f1b;       /* primary text */
+  --ink-soft: #57534b;  /* secondary text */
+  --muted: #8a857a;     /* tertiary / captions */
+  --border: #e7e1d5;
+
+  /* Indigo accent (shared across light + dark, ties into the topic palette) */
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-soft: #eef0ff;
+  --on-accent: #ffffff;
+
+  /* Dark "ink" surfaces — used by the data-visualisation panels */
+  --ink-bg: #15141b;
+  --ink-surface: #1d1b25;
+  --ink-elevated: #262330;
+  --ink-border: #302d3b;
+  --ink-text: #ece8f1;
+  --ink-muted: #a49fb0;
+  --ink-accent: #818cf8;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  letter-spacing: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+code, pre {
+  font-family: var(--font-mono);
+}
+
+a {
+  color: var(--accent);
+}

@@ -44,7 +44,7 @@ const chartOption = computed(() => ({
         color: '#fff',
       },
       itemStyle: {
-        borderColor: '#1e293b',
+        borderColor: '#302d3b',
         borderWidth: 2,
         gapWidth: 2,
       },
@@ -61,7 +61,7 @@ const chartOption = computed(() => ({
 
 <style scoped>
 .treemap-container {
-  background: #0f172a;
+  background: var(--ink-surface);
   border-radius: 8px;
   overflow: hidden;
   padding: 8px;
@@ -72,8 +72,8 @@ const chartOption = computed(() => ({
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #94a3b8;
-  background: #0f172a;
+  color: var(--ink-muted);
+  background: var(--ink-surface);
   border-radius: 8px;
 }
 </style>

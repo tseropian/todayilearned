@@ -88,13 +88,13 @@ const chartOption = computed(() => ({
       },
       emphasis: {
         focus: 'adjacency',
-        label: { show: true, color: '#e2e8f0', fontSize: 11 },
+        label: { show: true, color: '#ece8f1', fontSize: 11 },
         lineStyle: { opacity: 0.6 },
       },
       select: {
         focus: 'adjacency',
-        label: { show: true, color: '#e2e8f0', fontSize: 11 },
-        itemStyle: { borderColor: '#e2e8f0', borderWidth: 1.5 },
+        label: { show: true, color: '#ece8f1', fontSize: 11 },
+        itemStyle: { borderColor: '#ece8f1', borderWidth: 1.5 },
         lineStyle: { opacity: 0.6 },
       },
       data: props.nodes.map((n) => ({
@@ -120,7 +120,7 @@ const chartOption = computed(() => ({
 
 <style scoped>
 .network-container {
-  background: #0f172a;
+  background: var(--ink-surface);
   border-radius: 8px;
   overflow: hidden;
   padding: 8px;
@@ -131,8 +131,8 @@ const chartOption = computed(() => ({
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #94a3b8;
-  background: #0f172a;
+  color: var(--ink-muted);
+  background: var(--ink-surface);
   border-radius: 8px;
 }
 </style>
@@ -146,11 +146,11 @@ const chartOption = computed(() => ({
   justify-content: center;
   width: 14px;
   height: 14px;
-  border: 1px solid #64748b;
+  border: 1px solid #4a4756;
   border-radius: 50%;
   font-size: 10px;
   line-height: 1;
-  color: #94a3b8;
+  color: #a49fb0;
   cursor: help;
 }
 

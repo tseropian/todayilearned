@@ -222,4 +222,18 @@ onMounted(() => {
   padding: 12px 24px;
   box-sizing: border-box;
 }
+
+#caption h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+#archives-section h2 {
+  font-size: 1.6rem;
+  margin-top: 1.2em;
+  color: var(--ink);
+}
 </style>
