@@ -14,14 +14,13 @@ h1 {
 }
 
 #caption {
-  vertical-align:top;
-  float: left;
-  width:22%;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2.5em;
 }
 
 #list {
-  float: left;
-  width: 75%;
+  width: 100%;
   display: grid;
   grid-template-columns: 24% 24% 24% 24%;
   /* grid-template-columns: auto auto auto auto; */

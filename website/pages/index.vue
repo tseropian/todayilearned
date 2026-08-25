@@ -2,16 +2,13 @@
 <template>
   <div id="home">
     <div id="caption">
-      <div style="margin:0 auto; width: 80%">
-        <Logo />
-        <div class="title-content">
-          <h1>
-            Today <span class="ink-blue">I Learned</span>
-          </h1>
-          <h2>
-            A nerdy list of the things I'm (not) learning on Wikipedia
-          </h2>
-        </div>
+      <div class="title-content">
+        <h1>
+          Today <span class="ink-blue">I Learned</span>
+        </h1>
+        <h2>
+          A nerdy list of the things I'm (not) learning on Wikipedia
+        </h2>
       </div>
 
       <div class="links">
@@ -138,37 +135,22 @@ onMounted(() => {
     margin: 15px 0;
   }
   
-  #caption > div[style*="width: 80%"] {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    flex-direction: row;
-    margin: 20px 0;
-    width: 100% !important;
-  }
-  
-  #caption svg {
-    width: 33%;
-    height: auto;
-  }
-  
   .title-content {
-    flex: 1;
+    margin: 16px 0;
   }
-  
+
   .title-content h1 {
-    text-align: left;
+    text-align: center;
     margin: 5px 0;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
-  
+
   .title-content h2 {
-    text-align: left;
-    margin: 5px 0;
-    font-size: 0.4rem;
+    text-align: center;
+    margin: 8px 0;
+    font-size: 1rem;
   }
-  
+
   .links {
     display: flex;
     flex-direction: row;
