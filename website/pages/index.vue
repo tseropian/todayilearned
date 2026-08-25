@@ -168,8 +168,9 @@ onMounted(() => {
 #caption h2 {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   line-height: 1.5;
+  margin: 0;
   color: var(--coral);
 }
 
