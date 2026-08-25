@@ -11,17 +11,12 @@
         </h2>
       </div>
 
-      <div class="links">
-        <NuxtLink to="/visualisations" class="button--blue">
-          Visualisations
-        </NuxtLink>
-      </div>
-      <div class="links links--secondary">
+      <nav class="header-menu">
+        <NuxtLink to="/visualisations">Visualisations</NuxtLink>
         <a
           href="mailto:hello@todayilearned.cc"
           target="_blank"
           rel="noopener noreferrer"
-          class="button--green"
         >
           Contact
         </a>
@@ -29,11 +24,10 @@
           href="https://github.com/tseropian/todayilearned"
           target="_blank"
           rel="noopener noreferrer"
-          class="button--grey"
         >
           GitHub
         </a>
-      </div>
+      </nav>
     </div>
     <div id="links">
       <LinksList
@@ -124,47 +118,22 @@ onMounted(() => {
     order: 1;
   }
   
-  #caption h1 {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-  
-  #caption h2 {
-    font-size: 1.2rem;
-    text-align: center;
-    margin: 15px 0;
-  }
-  
   .title-content {
-    margin: 16px 0;
+    margin: 8px 0;
   }
 
   .title-content h1 {
-    text-align: center;
+    text-align: left;
     margin: 5px 0;
     font-size: 1.6rem;
   }
 
   .title-content h2 {
-    text-align: center;
+    text-align: left;
     margin: 8px 0;
     font-size: 1rem;
   }
 
-  .links {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin: 20px 0;
-  }
-  
-  .links a {
-    flex: 1;
-    text-align: center;
-    padding: 12px;
-    box-sizing: border-box;
-  }
-  
   #archives-section {
     order: 3;
     width: 100%;
@@ -190,25 +159,6 @@ onMounted(() => {
     box-sizing: border-box;
     order: 2;
   }
-}
-
-.links {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.links a {
-  flex: 0 0 auto;
-  text-align: center;
-  padding: 12px 24px;
-  box-sizing: border-box;
-}
-
-.links--secondary {
-  margin-top: 10px;
 }
 
 .ink-blue {
