@@ -34,17 +34,19 @@ const GENERIC_CATEGORY_PATTERNS = [
   /^biography with signature$/i,
 ];
 
+// Two-Ink Riso topic scale: a blue -> coral ramp through the purple overprint,
+// with a neutral char/dim for "Other". Matches the site palette tokens.
 const TOPIC_COLORS = {
-  Music: '#6366f1',
-  'TV & Film': '#f59e0b',
-  Sport: '#10b981',
-  Literature: '#3b82f6',
-  Geography: '#84cc16',
-  History: '#ef4444',
-  Science: '#06b6d4',
-  Politics: '#8b5cf6',
-  Technology: '#f97316',
-  Other: '#9ca3af',
+  Music: '#2f4eea',
+  'TV & Film': '#373ab1',
+  Sport: '#4b3293',
+  Literature: '#723c9b',
+  Geography: '#99448e',
+  History: '#be4b7a',
+  Science: '#d95067',
+  Politics: '#ee5557',
+  Technology: '#ff5b4a',
+  Other: '#6b6862',
 };
 
 function classifyByTitle(title, topicMap) {

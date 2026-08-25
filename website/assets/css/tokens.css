@@ -1,57 +1,68 @@
 /* ==========================================================================
    Today I Learned — design tokens
-   "Paper & Ink" : a warm-paper light UI and a matching warm-charcoal "ink"
-   surface for data panels, unified by one indigo accent and a single type
-   pairing (Fraunces display / Inter body / JetBrains Mono code).
+   "Two-Ink Riso" : a two-colour print job — electric blue and coral on
+   newsprint stock, with a purple overprint where the inks overlap. One light
+   theme across the whole site; the data panels sit on white "prints".
    Change a value here and it propagates across the whole site.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
 
 :root {
   /* Type */
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-  /* Light "paper" surfaces */
-  --paper: #faf7f2;
-  --surface: #ffffff;
-  --surface-2: #f1ece3;
-  --ink: #211f1b;       /* primary text */
-  --ink-soft: #57534b;  /* secondary text */
-  --muted: #8a857a;     /* tertiary / captions */
-  --border: #e7e1d5;
+  /* Riso inks */
+  --blue: #2f4eea;        /* primary ink: title, headings, links, primary action */
+  --blue-hover: #2540c9;
+  --coral: #ff5b4a;       /* second ink: tagline, accents, footer rule */
+  --overprint: #3b2e8f;   /* where the inks overlap: links, bars */
 
-  /* Indigo accent (shared across light + dark, ties into the topic palette) */
-  --accent: #4f46e5;
-  --accent-hover: #4338ca;
-  --accent-soft: #eef0ff;
+  /* Surfaces */
+  --stock: #f2efe9;       /* newsprint page */
+  --print: #ffffff;       /* white "print" cards / rows / panels */
+  --char: #1a1a1e;        /* body text */
+  --dim: #6b6862;         /* counts, metadata, tagline-secondary */
+  --rule: #e2dcd0;        /* hairlines on stock */
+
+  /* Semantic aliases (consumed across the site) */
+  --paper: var(--stock);
+  --surface: var(--print);
+  --surface-2: var(--print);
+  --ink: var(--char);
+  --ink-soft: #423f3a;
+  --muted: var(--dim);
+  --border: var(--rule);
+  --accent: var(--blue);
+  --accent-hover: var(--blue-hover);
+  --accent-soft: #e6e9fd;
   --on-accent: #ffffff;
 
-  /* Dark "ink" surfaces — used by the data-visualisation panels */
-  --ink-bg: #15141b;
-  --ink-surface: #1d1b25;
-  --ink-elevated: #262330;
-  --ink-border: #302d3b;
-  --ink-text: #ece8f1;
-  --ink-muted: #a49fb0;
-  --ink-accent: #818cf8;
+  /* Data-panel aliases (visualisation page + charts) — light "print" on stock */
+  --ink-bg: var(--stock);
+  --ink-surface: var(--print);
+  --ink-elevated: #eae6de;
+  --ink-border: var(--rule);
+  --ink-text: var(--char);
+  --ink-muted: var(--dim);
+  --ink-accent: var(--blue);
 
-  /* Radii */
-  --radius-sm: 6px;
-  --radius: 10px;
-  --radius-lg: 16px;
+  /* Radii — riso print is crisp, so keep corners tight */
+  --radius-sm: 3px;
+  --radius: 4px;
+  --radius-lg: 8px;
 }
 
 html {
-  background: var(--paper);
+  background: var(--stock);
 }
 
 body {
   font-family: var(--font-body);
-  color: var(--ink);
-  background: var(--paper);
+  color: var(--char);
+  background: var(--stock);
   letter-spacing: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -59,10 +70,9 @@ body {
 
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   line-height: 1.15;
-  color: var(--ink);
+  color: var(--char);
 }
 
 code, pre {
@@ -70,5 +80,5 @@ code, pre {
 }
 
 a {
-  color: var(--accent);
+  color: var(--overprint);
 }

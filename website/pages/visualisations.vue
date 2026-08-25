@@ -111,7 +111,7 @@ const totalPages = computed(() =>
   font-family: var(--font-display);
   font-size: 2.5rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--char);
   margin: 0 0 8px;
   text-align: left;
 }
@@ -131,8 +131,8 @@ const totalPages = computed(() =>
 #visualisations .section h2 {
   font-family: var(--font-display);
   font-size: 1.5rem;
-  font-weight: 600;
-  color: #fff;
+  font-weight: 700;
+  color: var(--blue);
   margin: 0 0 8px;
   text-align: left;
 }
@@ -151,7 +151,7 @@ const totalPages = computed(() =>
   border-radius: 4px;
   padding: 1px 5px;
   font-size: 0.8rem;
-  color: var(--ink-accent);
+  color: var(--overprint);
 }
 
 #visualisations .legend {

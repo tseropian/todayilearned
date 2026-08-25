@@ -37,8 +37,9 @@ h1 {
   width: auto;
   /* display: inline-block; */
   display: inline-grid;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
+  background: var(--print);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--blue);
   border-radius: var(--radius);
   padding: 0.5em 1em;
 }
@@ -51,30 +52,32 @@ h1 {
 }
 
 .single-day li {
-  padding: 0.2em;
-  padding-left: 1em;
-  margin-bottom: 0.5em;
+  padding: 0.35em 0;
   margin-right: 1em;
   /* display: inline; */
-  background: var(--ink);
   width: 16em;
-  border-radius: var(--radius-sm);
+  border-bottom: 1px solid var(--rule);
   list-style-type: none;
 }
 
+.single-day li:last-child {
+  border-bottom: 0;
+}
+
 .single-day a{
-  color: var(--surface-2);
+  color: var(--overprint);
 }
 .single-day a:visited {
-  color: var(--surface-2);
+  color: var(--overprint);
 }
 
 .single-day p {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 2em;
+  font-weight: 700;
+  font-size: 1.6em;
+  letter-spacing: -0.02em;
   margin-top: 0;
-  color: var(--ink-soft);
+  color: var(--blue);
 }
 
 /* Buttons: one filled primary + neutral outline variants sharing a shape */
@@ -101,25 +104,25 @@ h1 {
   border-color: var(--accent-hover);
 }
 
-/* Secondary — Contact */
+/* Secondary — Contact (overprint ink outline) */
 .button--green {
-  border: 1px solid var(--border);
-  color: var(--ink);
+  border: 1px solid var(--overprint);
+  color: var(--overprint);
 }
 .button--green:hover {
-  border-color: var(--ink);
-  background-color: var(--surface-2);
+  color: var(--on-accent);
+  background-color: var(--overprint);
 }
 
-/* Secondary — GitHub */
+/* Secondary — GitHub (char outline) */
 .button--grey {
-  border: 1px solid var(--border);
-  color: var(--ink);
+  border: 1px solid var(--char);
+  color: var(--char);
   margin-left: 0;
 }
 .button--grey:hover {
-  border-color: var(--ink);
-  background-color: var(--surface-2);
+  color: var(--on-accent);
+  background-color: var(--char);
 }
 
 .archive-link {

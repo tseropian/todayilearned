@@ -112,9 +112,8 @@ onMounted(() => {
   
   .single-day {
     margin-bottom: 15px;
-    padding: 10px;
-    background: #f9f9f9;
-    border-radius: 5px;
+    padding: 10px 14px;
+    background: var(--print);
     width: 100%;
     box-sizing: border-box;
   }
@@ -136,7 +135,7 @@ onMounted(() => {
   }
   
   #links-per-day a {
-    color: white;
+    color: var(--overprint);
     text-decoration: none;
   }
 }

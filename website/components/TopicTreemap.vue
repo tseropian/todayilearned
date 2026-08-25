@@ -44,7 +44,7 @@ const chartOption = computed(() => ({
         color: '#fff',
       },
       itemStyle: {
-        borderColor: '#302d3b',
+        borderColor: '#f2efe9',
         borderWidth: 2,
         gapWidth: 2,
       },

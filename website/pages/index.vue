@@ -6,7 +6,7 @@
         <Logo />
         <div class="title-content">
           <h1>
-            Today I Learned
+            Today <span class="ink-blue">I Learned</span>
           </h1>
           <h2>
             A nerdy list of the things I'm (not) learning on Wikipedia
@@ -229,17 +229,21 @@ onMounted(() => {
   margin-top: 10px;
 }
 
+.ink-blue {
+  color: var(--blue);
+}
+
 #caption h2 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 1.15rem;
-  line-height: 1.4;
-  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--coral);
 }
 
 #archives-section h2 {
   font-size: 1.6rem;
   margin-top: 1.2em;
-  color: var(--ink);
+  color: var(--blue);
 }
 </style>

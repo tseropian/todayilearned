@@ -16,3 +16,21 @@ onMounted(() => {
   currentDate.value = new Date().toLocaleDateString()
 })
 </script>
+
+<style scoped>
+.footer {
+  border-top: 3px solid var(--coral);
+  margin-top: 32px;
+  padding: 16px 30px;
+  color: var(--dim);
+  font-size: 0.85rem;
+}
+
+.footer .poweredby {
+  margin: 0 0 4px;
+}
+
+.footer a {
+  color: var(--overprint);
+}
+</style>
