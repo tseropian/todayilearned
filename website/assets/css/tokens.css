@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Today I Learned — design tokens
+   "Two-Ink Riso" : a two-colour print job — electric blue and coral on
+   newsprint stock, with a purple overprint where the inks overlap. One light
+   theme across the whole site; the data panels sit on white "prints".
+   Change a value here and it propagates across the whole site.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap');
+
+:root {
+  /* Type */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Riso inks */
+  --blue: #2f4eea;        /* primary ink: title, headings, links, primary action */
+  --blue-hover: #2540c9;
+  --coral: #ff5b4a;       /* second ink: tagline, accents, footer rule */
+  --overprint: #3b2e8f;   /* where the inks overlap: links, bars */
+
+  /* Surfaces */
+  --stock: #f2efe9;       /* newsprint page */
+  --print: #ffffff;       /* white "print" cards / rows / panels */
+  --char: #1a1a1e;        /* body text */
+  --dim: #6b6862;         /* counts, metadata, tagline-secondary */
+  --rule: #e2dcd0;        /* hairlines on stock */
+
+  /* Semantic aliases (consumed across the site) */
+  --paper: var(--stock);
+  --surface: var(--print);
+  --surface-2: var(--print);
+  --ink: var(--char);
+  --ink-soft: #423f3a;
+  --muted: var(--dim);
+  --border: var(--rule);
+  --accent: var(--blue);
+  --accent-hover: var(--blue-hover);
+  --accent-soft: #e6e9fd;
+  --on-accent: #ffffff;
+
+  /* Data-panel aliases (visualisation page + charts) — light "print" on stock */
+  --ink-bg: var(--stock);
+  --ink-surface: var(--print);
+  --ink-elevated: #eae6de;
+  --ink-border: var(--rule);
+  --ink-text: var(--char);
+  --ink-muted: var(--dim);
+  --ink-accent: var(--blue);
+
+  /* Radii — riso print is crisp, so keep corners tight */
+  --radius-sm: 3px;
+  --radius: 4px;
+  --radius-lg: 8px;
+}
+
+html {
+  background: var(--stock);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--char);
+  background: var(--stock);
+  letter-spacing: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--char);
+}
+
+code, pre {
+  font-family: var(--font-mono);
+}
+
+a {
+  color: var(--overprint);
+}

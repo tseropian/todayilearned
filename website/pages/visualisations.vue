@@ -16,7 +16,8 @@
         Run <code>node tools/fetch-wikipedia-metadata.js</code> then
         <code>node tools/build-visualisation-data.js</code> to regenerate with full Wikipedia category data.
       </p>
-      <TopicTreemap v-if="topics && topics.length" :topics="topics" />
+      <Spinner v-if="topicsPending" label="Loading topics…" />
+      <TopicTreemap v-else-if="topics && topics.length" :topics="topics" />
     </section>
 
     <section class="section">
@@ -34,7 +35,8 @@
           {{ topic.topic }}
         </span>
       </div>
-      <TopPagesChart v-if="topPages && topPages.length" :pages="topPages" />
+      <Spinner v-if="topPagesPending" label="Loading pages…" />
+      <TopPagesChart v-else-if="topPages && topPages.length" :pages="topPages" />
     </section>
 
     <section class="section">
@@ -53,7 +55,8 @@
           {{ topic.topic }}
         </span>
       </div>
-      <WikipediaNetworkGraph v-if="network && network.nodes && network.nodes.length" :nodes="network.nodes" :edges="network.edges" />
+      <Spinner v-if="networkPending" label="Loading network…" />
+      <WikipediaNetworkGraph v-else-if="network && network.nodes && network.nodes.length" :nodes="network.nodes" :edges="network.edges" />
     </section>
   </div>
 </template>
@@ -62,9 +65,9 @@
 // server: false — these are static public/data files fetched purely for the
 // ClientOnly charts below; the prerenderer's internal self-fetch to its own
 // public assets 404s, so fetch only once mounted in the browser instead.
-const { data: topics } = await useFetch('/data/wikipedia-topics.json', { server: false, default: () => [] })
-const { data: topPages } = await useFetch('/data/wikipedia-top-pages.json', { server: false, default: () => [] })
-const { data: network } = await useFetch('/data/wikipedia-network.json', { server: false, default: () => ({ nodes: [], edges: [] }) })
+const { data: topics, pending: topicsPending } = await useFetch('/data/wikipedia-topics.json', { server: false, default: () => [] })
+const { data: topPages, pending: topPagesPending } = await useFetch('/data/wikipedia-top-pages.json', { server: false, default: () => [] })
+const { data: network, pending: networkPending } = await useFetch('/data/wikipedia-network.json', { server: false, default: () => ({ nodes: [], edges: [] }) })
 
 const totalOccurrences = computed(() =>
   (topics.value || []).reduce((sum, t) => sum + t.totalOccurrences, 0),
@@ -78,11 +81,11 @@ const totalPages = computed(() =>
 <style>
 #visualisations {
   min-height: 100vh;
-  background: #0f172a;
+  background: var(--ink-bg);
   max-width: 100%;
   padding: 32px 24px 64px;
-  font-family: 'Helvetica Neue', sans-serif;
-  color: #e2e8f0;
+  font-family: var(--font-body);
+  color: var(--ink-text);
   text-align: left;
 }
 
@@ -93,7 +96,7 @@ const totalPages = computed(() =>
 
 #visualisations .back-link {
   display: inline-block;
-  color: #94a3b8;
+  color: var(--ink-muted);
   text-decoration: none;
   font-size: 14px;
   margin-bottom: 16px;
@@ -101,19 +104,20 @@ const totalPages = computed(() =>
 }
 
 #visualisations .back-link:hover {
-  color: #e2e8f0;
+  color: var(--ink-text);
 }
 
 #visualisations h1 {
-  font-size: 2rem;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #f1f5f9;
+  color: var(--char);
   margin: 0 0 8px;
   text-align: left;
 }
 
 #visualisations .subtitle {
-  color: #94a3b8;
+  color: var(--ink-muted);
   font-size: 1rem;
   margin: 0;
   text-align: left;
@@ -125,15 +129,16 @@ const totalPages = computed(() =>
 }
 
 #visualisations .section h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #f1f5f9;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--blue);
   margin: 0 0 8px;
   text-align: left;
 }
 
 #visualisations .section-description {
-  color: #64748b;
+  color: var(--ink-muted);
   font-size: 0.875rem;
   margin: 0 0 16px;
   line-height: 1.6;
@@ -141,11 +146,12 @@ const totalPages = computed(() =>
 }
 
 #visualisations .section-description code {
-  background: #1e293b;
+  font-family: var(--font-mono);
+  background: var(--ink-elevated);
   border-radius: 4px;
   padding: 1px 5px;
   font-size: 0.8rem;
-  color: #93c5fd;
+  color: var(--overprint);
 }
 
 #visualisations .legend {
@@ -160,7 +166,17 @@ const totalPages = computed(() =>
   align-items: center;
   gap: 6px;
   font-size: 0.8rem;
-  color: #94a3b8;
+  color: var(--ink-muted);
+}
+
+/* Retune the spinner for the dark data panels */
+#visualisations .spinner__ring {
+  border-color: var(--ink-border);
+  border-top-color: var(--ink-accent);
+}
+
+#visualisations .spinner__label {
+  color: var(--ink-muted);
 }
 
 #visualisations .legend-dot {

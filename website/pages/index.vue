@@ -2,27 +2,21 @@
 <template>
   <div id="home">
     <div id="caption">
-      <div style="margin:0 auto; width: 80%">
-        <Logo />
-        <div class="title-content">
-          <h1>
-            Today I Learned
-          </h1>
-          <h2>
-            A nerdy list of the things I'm (not) learning on Wikipedia
-          </h2>
-        </div>
+      <div class="title-content">
+        <h1>
+          Today <span class="ink-blue">I Learned</span>
+        </h1>
+        <h2>
+          A nerdy list of the things I'm (not) learning on Wikipedia
+        </h2>
       </div>
 
-      <div class="links">
-        <NuxtLink to="/visualisations" class="button--blue">
-          Visualisations
-        </NuxtLink>
+      <nav class="header-menu">
+        <NuxtLink to="/visualisations">Visualisations</NuxtLink>
         <a
           href="mailto:hello@todayilearned.cc"
           target="_blank"
           rel="noopener noreferrer"
-          class="button--green"
         >
           Contact
         </a>
@@ -30,11 +24,10 @@
           href="https://github.com/tseropian/todayilearned"
           target="_blank"
           rel="noopener noreferrer"
-          class="button--grey"
         >
           GitHub
         </a>
-      </div>
+      </nav>
     </div>
     <div id="links">
       <LinksList
@@ -125,62 +118,22 @@ onMounted(() => {
     order: 1;
   }
   
-  #caption h1 {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-  
-  #caption h2 {
-    font-size: 1.2rem;
-    text-align: center;
-    margin: 15px 0;
-  }
-  
-  #caption > div[style*="width: 80%"] {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    flex-direction: row;
-    margin: 20px 0;
-    width: 100% !important;
-  }
-  
-  #caption svg {
-    width: 33%;
-    height: auto;
-  }
-  
   .title-content {
-    flex: 1;
+    margin: 8px 0;
   }
-  
+
   .title-content h1 {
     text-align: left;
     margin: 5px 0;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
-  
+
   .title-content h2 {
     text-align: left;
-    margin: 5px 0;
-    font-size: 0.4rem;
+    margin: 8px 0;
+    font-size: 1rem;
   }
-  
-  .links {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin: 20px 0;
-  }
-  
-  .links a {
-    flex: 1;
-    text-align: center;
-    padding: 12px;
-    box-sizing: border-box;
-  }
-  
+
   #archives-section {
     order: 3;
     width: 100%;
@@ -208,18 +161,22 @@ onMounted(() => {
   }
 }
 
-.links {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  justify-content: center;
-  margin: 20px 0;
+.ink-blue {
+  color: var(--blue);
 }
 
-.links a {
-  flex: 0 0 auto;
-  text-align: center;
-  padding: 12px 24px;
-  box-sizing: border-box;
+#caption h2 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+  color: var(--coral);
+}
+
+#archives-section h2 {
+  font-size: 1.6rem;
+  margin-top: 1.2em;
+  color: var(--blue);
 }
 </style>
