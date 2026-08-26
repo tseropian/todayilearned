@@ -1,7 +1,6 @@
 <template>
   <div id="visualisations">
     <div class="page-header">
-      <NuxtLink to="/" class="back-link">← Today I Learned</NuxtLink>
       <h1>Wikipedia Visualisations</h1>
       <p class="subtitle">
         Exploring {{ totalPages.toLocaleString() }} Wikipedia pages across
@@ -115,19 +114,6 @@ const totalPages = computed(() =>
 #visualisations .page-header {
   max-width: 960px;
   margin: 0 auto 48px;
-}
-
-#visualisations .back-link {
-  display: inline-block;
-  color: var(--ink-muted);
-  text-decoration: none;
-  font-size: 14px;
-  margin-bottom: 16px;
-  transition: color 0.2s;
-}
-
-#visualisations .back-link:hover {
-  color: var(--ink-text);
 }
 
 #visualisations h1 {
