@@ -1,0 +1,83 @@
+# Unified Today I Learned backend: every Lambda in one service, so all HTTP
+# routes share a single API Gateway. Handlers stay in their original folders and
+# are referenced in place — nothing was moved.
+service: til-api
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: eu-west-1
+  environment:
+    DYNAMODB_TABLE: til-links-live
+    LINKS_TABLE: til-links-live
+    METADATA_TABLE: til-wikipedia-metadata
+    DATA_BUCKET: todayilearned-prod
+    DATA_PREFIX: data
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:BatchGetItem
+        - dynamodb:BatchWriteItem
+      Resource:
+        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/til-links-live"
+        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/til-wikipedia-metadata"
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:GetObject
+      Resource: "arn:aws:s3:::${self:provider.environment.DATA_BUCKET}/${self:provider.environment.DATA_PREFIX}/*"
+
+plugins:
+  - serverless-offline
+
+package:
+  patterns:
+    # Bundle only the root node_modules; drop the now-unused per-folder installs
+    # and the superseded per-service serverless files.
+    - '!*/node_modules/**'
+    - '!*/serverless.yml'
+    - '!*/serverless.yaml'
+
+functions:
+  # POST /links — add a link
+  addLink:
+    handler: addLink/src/addLink.addLink
+    events:
+      - http:
+          path: links
+          method: post
+          cors: true
+
+  # GET /links/{date} — links for a date range
+  getLinks:
+    handler: getLinksByDate/handler.getLinks
+    events:
+      - http:
+          path: links/{date}
+          method: get
+          cors: true
+
+  # GET /visualisation-data — published viz data (+ createdAt)
+  serve:
+    handler: buildVisualisationData/serve.serve
+    timeout: 15
+    memorySize: 256
+    events:
+      - http:
+          path: visualisation-data
+          method: get
+          cors: true
+
+  # Daily rebuild of the visualisation data (no HTTP endpoint)
+  build:
+    handler: buildVisualisationData/handler.build
+    timeout: 900
+    memorySize: 512
+    events:
+      - schedule: cron(0 3 * * ? *)

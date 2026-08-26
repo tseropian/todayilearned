@@ -1,7 +1,9 @@
-# til-build-visualisation-data
+# Visualisation data (build + serve)
 
-Two Lambdas: a scheduled **build** that rebuilds the Wikipedia visualisation data
-and publishes it to S3, and an HTTP **serve** endpoint the website reads from.
+Two Lambdas — a scheduled **build** that rebuilds the Wikipedia visualisation
+data and publishes it to S3, and an HTTP **serve** endpoint the website reads
+from. Both are defined in the unified `../serverless.yml` (`til-api`); the
+handlers just live in this folder. Deploy from `backend/` — see `../README.md`.
 
 ## build (scheduled)
 
@@ -34,9 +36,10 @@ payload (`serve.js`):
 
 ## Deploy
 
+Part of the unified service — deploy everything from `backend/`:
+
 ```sh
-npm install
-npx serverless deploy
+cd backend && npm install && npx serverless deploy
 ```
 
 ## Configuration (env vars, defaults in `serverless.yml`)
