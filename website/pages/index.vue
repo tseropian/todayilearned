@@ -1,34 +1,6 @@
 
 <template>
   <div id="home">
-    <div id="caption">
-      <div class="title-content">
-        <h1>
-          Today <span class="ink-blue">I Learned</span>
-        </h1>
-        <h2>
-          A nerdy list of the things I'm (not) learning on Wikipedia
-        </h2>
-      </div>
-
-      <nav class="header-menu">
-        <NuxtLink to="/visualisations">Visualisations</NuxtLink>
-        <a
-          href="mailto:hello@todayilearned.cc"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Contact
-        </a>
-        <a
-          href="https://github.com/tseropian/todayilearned"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </a>
-      </nav>
-    </div>
     <div id="links">
       <LinksList
         :start="startDate"
@@ -111,29 +83,6 @@ onMounted(() => {
     box-sizing: border-box;
   }
   
-  #caption {
-    width: 100%;
-    padding: 0 10px;
-    box-sizing: border-box;
-    order: 1;
-  }
-  
-  .title-content {
-    margin: 8px 0;
-  }
-
-  .title-content h1 {
-    text-align: left;
-    margin: 5px 0;
-    font-size: 1.6rem;
-  }
-
-  .title-content h2 {
-    text-align: left;
-    margin: 8px 0;
-    font-size: 1rem;
-  }
-
   #archives-section {
     order: 3;
     width: 100%;
@@ -159,19 +108,6 @@ onMounted(() => {
     box-sizing: border-box;
     order: 2;
   }
-}
-
-.ink-blue {
-  color: var(--blue);
-}
-
-#caption h2 {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin: 0;
-  color: var(--coral);
 }
 
 #archives-section h2 {
