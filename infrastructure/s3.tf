@@ -23,6 +23,19 @@ resource "aws_s3_bucket_acl" "website" {
   acl    = "public-read"
 }
 
+# Allow the browser to fetch the visualisation JSON (published under /data/ by
+# the til-build-visualisation-data Lambda) cross-origin from the website.
+resource "aws_s3_bucket_cors_configuration" "website" {
+  bucket = aws_s3_bucket.website.id
+
+  cors_rule {
+    allowed_methods = ["GET", "HEAD"]
+    allowed_origins = ["https://todayilearned.cc", "https://*.vercel.app"]
+    allowed_headers = ["*"]
+    max_age_seconds = 3600
+  }
+}
+
 resource "aws_s3_bucket_policy" "website" {
   bucket = aws_s3_bucket.website.id
   policy = jsonencode({

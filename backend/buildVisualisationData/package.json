@@ -1,0 +1,17 @@
+{
+  "name": "til-build-visualisation-data",
+  "version": "1.0.0",
+  "description": "Scheduled Lambda that rebuilds the Wikipedia visualisation data and publishes it to S3.",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1691.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^7.0.0"
+  }
+}
