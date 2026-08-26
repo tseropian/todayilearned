@@ -41,7 +41,11 @@ export default defineNuxtConfig({
     // Private keys are only available on server-side
     // Public keys that are exposed to client-side
     public: {
-      TIL_API_HOST: process.env.TIL_API_HOST || 'https://pzbugc7ro1.execute-api.eu-west-1.amazonaws.com/dev/'
+      TIL_API_HOST: process.env.TIL_API_HOST || 'https://pzbugc7ro1.execute-api.eu-west-1.amazonaws.com/dev/',
+      // Endpoint of the `serve` Lambda in til-build-visualisation-data. Returns
+      // { createdAt, topics, topPages, network }. Fetched client-side at runtime
+      // so the static site picks up fresh data (and its date) without a rebuild.
+      TIL_DATA_API: process.env.TIL_DATA_API || 'https://api.todayilearned.cc/visualisation-data'
     }
   }
 })

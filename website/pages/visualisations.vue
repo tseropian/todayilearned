@@ -7,14 +7,16 @@
         Exploring {{ totalPages.toLocaleString() }} Wikipedia pages across
         {{ totalOccurrences.toLocaleString() }} visits
       </p>
+      <p v-if="formattedCreatedAt" class="data-freshness">
+        Data as of {{ formattedCreatedAt }}
+      </p>
     </div>
 
     <section class="section">
       <h2>Topics by visit count</h2>
       <p class="section-description">
         Pages grouped by topic, sized by total number of visits.
-        Run <code>node tools/fetch-wikipedia-metadata.js</code> then
-        <code>node tools/build-visualisation-data.js</code> to regenerate with full Wikipedia category data.
+        Data is refreshed daily by the <code>til-build-visualisation-data</code> Lambda.
       </p>
       <Spinner v-if="topicsPending" label="Loading topics…" />
       <TopicTreemap v-else-if="topics && topics.length" :topics="topics" />
@@ -62,19 +64,40 @@
 </template>
 
 <script setup>
-// server: false — these are static public/data files fetched purely for the
-// ClientOnly charts below; the prerenderer's internal self-fetch to its own
-// public assets 404s, so fetch only once mounted in the browser instead.
-const { data: topics, pending: topicsPending } = await useFetch('/data/wikipedia-topics.json', { server: false, default: () => [] })
-const { data: topPages, pending: topPagesPending } = await useFetch('/data/wikipedia-top-pages.json', { server: false, default: () => [] })
-const { data: network, pending: networkPending } = await useFetch('/data/wikipedia-network.json', { server: false, default: () => ({ nodes: [], edges: [] }) })
+// Fetch the freshly-published data from the serve Lambda at runtime
+// (client-side) so the statically-generated site reflects the latest daily
+// pipeline run — including when it ran — without a rebuild. One request backs
+// all three sections and carries the createdAt date.
+const { public: { TIL_DATA_API } } = useRuntimeConfig()
+
+const { data: viz, pending } = await useFetch(TIL_DATA_API, {
+  server: false,
+  default: () => ({ createdAt: null, topics: [], topPages: [], network: { nodes: [], edges: [] } }),
+})
+
+const topics = computed(() => viz.value?.topics || [])
+const topPages = computed(() => viz.value?.topPages || [])
+const network = computed(() => viz.value?.network || { nodes: [], edges: [] })
+
+// The single request backs every section, so they share one pending flag.
+const topicsPending = pending
+const topPagesPending = pending
+const networkPending = pending
+
+const formattedCreatedAt = computed(() => {
+  const createdAt = viz.value?.createdAt
+  if (!createdAt) return ''
+  return new Date(createdAt).toLocaleDateString(undefined, {
+    year: 'numeric', month: 'long', day: 'numeric',
+  })
+})
 
 const totalOccurrences = computed(() =>
-  (topics.value || []).reduce((sum, t) => sum + t.totalOccurrences, 0),
+  topics.value.reduce((sum, t) => sum + t.totalOccurrences, 0),
 )
 
 const totalPages = computed(() =>
-  (topics.value || []).reduce((sum, t) => sum + t.pageCount, 0),
+  topics.value.reduce((sum, t) => sum + t.pageCount, 0),
 )
 </script>
 
@@ -120,6 +143,13 @@ const totalPages = computed(() =>
   color: var(--ink-muted);
   font-size: 1rem;
   margin: 0;
+  text-align: left;
+}
+
+#visualisations .data-freshness {
+  color: var(--dim);
+  font-size: 0.8rem;
+  margin: 6px 0 0;
   text-align: left;
 }
 
