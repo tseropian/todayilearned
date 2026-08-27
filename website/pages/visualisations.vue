@@ -63,6 +63,24 @@
 </template>
 
 <script setup>
+const siteUrl = useRuntimeConfig().public.siteUrl
+const vizTitle = 'Wikipedia Visualisations — Today I Learned'
+const vizDescription = 'Explore the Wikipedia pages behind Today I Learned: a topic treemap, the most-visited pages, and a category-similarity network graph.'
+const vizUrl = `${siteUrl}/visualisations`
+
+useSeoMeta({
+  title: vizTitle,
+  description: vizDescription,
+  ogTitle: vizTitle,
+  ogDescription: vizDescription,
+  ogUrl: vizUrl,
+  twitterTitle: vizTitle,
+  twitterDescription: vizDescription
+})
+useHead({
+  link: [{ rel: 'canonical', href: vizUrl }]
+})
+
 // Fetch the freshly-published data from the serve Lambda at runtime
 // (client-side) so the statically-generated site reflects the latest daily
 // pipeline run — including when it ran — without a rebuild. One request backs

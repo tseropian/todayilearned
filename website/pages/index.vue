@@ -24,6 +24,22 @@
 <script setup>
 import { format, subDays } from 'date-fns'
 
+const siteUrl = useRuntimeConfig().public.siteUrl
+const description = "A nerdy list of the things I'm (not) learning on Wikipedia."
+
+useSeoMeta({
+  title: 'Today I Learned',
+  description,
+  ogTitle: 'Today I Learned',
+  ogDescription: description,
+  ogUrl: siteUrl,
+  twitterTitle: 'Today I Learned',
+  twitterDescription: description
+})
+useHead({
+  link: [{ rel: 'canonical', href: siteUrl }]
+})
+
 const startDate = format(new Date(), 'yyyy-MM-dd')
 const endDate = format(subDays(new Date(), 30), 'yyyy-MM-dd')
 const dateRange = ref([])

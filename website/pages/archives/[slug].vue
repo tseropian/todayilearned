@@ -47,6 +47,24 @@ import { format, addDays } from 'date-fns'
 const route = useRoute()
 const slug = route.params.slug
 
+const siteUrl = useRuntimeConfig().public.siteUrl
+const archiveTitle = `Archives: ${slug} — Today I Learned`
+const archiveDescription = `Wikipedia pages I learned about in ${slug}, from Today I Learned.`
+const archiveUrl = `${siteUrl}/archives/${slug}`
+
+useSeoMeta({
+  title: archiveTitle,
+  description: archiveDescription,
+  ogTitle: archiveTitle,
+  ogDescription: archiveDescription,
+  ogUrl: archiveUrl,
+  twitterTitle: archiveTitle,
+  twitterDescription: archiveDescription
+})
+useHead({
+  link: [{ rel: 'canonical', href: archiveUrl }]
+})
+
 const endDate = slug + '-01'
 const startDate = format(addDays(new Date(endDate), 30), 'yyyy-MM-dd')
 </script>
