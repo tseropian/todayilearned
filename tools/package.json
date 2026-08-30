@@ -9,8 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.935.0",
-    "axios": "^0.21.1",
+    "aws-sdk": "^2.1691.0",
+    "axios": "^1.20.0",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
