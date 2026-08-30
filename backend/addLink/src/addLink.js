@@ -2,14 +2,12 @@
 const { format } = require('date-fns')
 
 const { v4: uuidv4 } = require('uuid')
-const { DynamoDB } = require('aws-sdk')
-const AWS = require('aws-sdk')
-AWS.config.update({
-  region: 'eu-west-1'
-})
-const dynamoDb = new DynamoDB.DocumentClient()
+const { DynamoDBClient } = require('@aws-sdk/client-dynamodb')
+const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb')
 
-module.exports.addLink = (event, context, callback) => {
+const dynamoDb = DynamoDBDocumentClient.from(new DynamoDBClient({ region: 'eu-west-1' }))
+
+module.exports.addLink = async (event, context, callback) => {
   const data = JSON.parse(event.body)
   let timestamp
   if (data.date) {
@@ -32,21 +30,21 @@ module.exports.addLink = (event, context, callback) => {
     }
   }
 
-  dynamoDb.put(params, (error, result) => {
-    if (error) {
-      console.error(error)
-      callback(new Error('Couldn\'t create link.'))
-      return
-    }
+  try {
+    await dynamoDb.send(new PutCommand(params))
+  } catch (error) {
+    console.error(error)
+    callback(new Error('Couldn\'t create link.'))
+    return
+  }
 
-    const response = {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': true
-      },
-      body: JSON.stringify(params.Item)
-    }
-    callback(null, response)
-  })
+  const response = {
+    statusCode: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true
+    },
+    body: JSON.stringify(params.Item)
+  }
+  callback(null, response)
 }

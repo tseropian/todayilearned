@@ -2,7 +2,9 @@
   "name": "til-api",
   "description": "Unified Today I Learned backend — all Lambdas in one Serverless service / API Gateway.",
   "dependencies": {
-    "aws-sdk": "^2.1691.0",
+    "@aws-sdk/client-dynamodb": "^3.1121.0",
+    "@aws-sdk/client-s3": "^3.1121.0",
+    "@aws-sdk/lib-dynamodb": "^3.1121.0",
     "date-fns": "^4.4.0",
     "uuid": "^14.0.2"
   },

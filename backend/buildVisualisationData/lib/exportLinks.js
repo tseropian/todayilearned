@@ -2,16 +2,17 @@
 // Stage 1: scan the live links table and count Wikipedia URLs.
 // Extracted from tools/export-wikipedia-links-csv.js, but returns an in-memory
 // Map instead of writing a CSV so the Lambda can pipe it straight to stage 2.
+const { ScanCommand } = require('@aws-sdk/lib-dynamodb');
 
 async function scanLinkCounts(dynamodb, tableName) {
   const counts = new Map();
   let lastEvaluatedKey;
 
   do {
-    const result = await dynamodb.scan({
+    const result = await dynamodb.send(new ScanCommand({
       TableName: tableName,
       ExclusiveStartKey: lastEvaluatedKey,
-    }).promise();
+    }));
 
     for (const item of result.Items) {
       if (item.url && item.url.includes('wikipedia.org')) {

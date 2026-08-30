@@ -3,6 +3,7 @@
 // using the DynamoDB metadata table as a cache. Extracted from
 // tools/fetch-wikipedia-metadata.js.
 const https = require('https');
+const { BatchGetCommand, BatchWriteCommand } = require('@aws-sdk/lib-dynamodb');
 
 const WIKIPEDIA_API_BASE = 'https://en.wikipedia.org/w/api.php';
 const BATCH_SIZE = 50;
@@ -29,9 +30,9 @@ async function getFromCache(dynamodb, tableName, titles) {
   const batchSize = 100;
   for (let i = 0; i < titles.length; i += batchSize) {
     const batch = titles.slice(i, i + batchSize);
-    const result = await dynamodb.batchGet({
+    const result = await dynamodb.send(new BatchGetCommand({
       RequestItems: { [tableName]: { Keys: batch.map((t) => ({ pageTitle: t })) } },
-    }).promise();
+    }));
     for (const item of (result.Responses[tableName] || [])) {
       cached[item.pageTitle] = item;
     }
@@ -42,11 +43,11 @@ async function getFromCache(dynamodb, tableName, titles) {
 async function saveToCache(dynamodb, tableName, items) {
   for (let i = 0; i < items.length; i += 25) {
     const batch = items.slice(i, i + 25);
-    await dynamodb.batchWrite({
+    await dynamodb.send(new BatchWriteCommand({
       RequestItems: {
         [tableName]: batch.map((item) => ({ PutRequest: { Item: item } })),
       },
-    }).promise();
+    }));
   }
 }
 
