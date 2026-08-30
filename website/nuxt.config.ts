@@ -23,6 +23,7 @@ function archiveRoutes(): string[] {
 
 export default defineNuxtConfig({
   // https://nuxt.com/docs/api/configuration/nuxt-config
+  compatibilityDate: '2026-08-30',
   devtools: { enabled: true },
   experimental: { appManifest: false },
   // Global page headers: https://nuxt.com/docs/api/configuration/nuxt-config#head
