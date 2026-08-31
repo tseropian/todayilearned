@@ -29,7 +29,14 @@
     "@aws-sdk/client-dynamodb": "^3.1121.0",
     "@aws-sdk/lib-dynamodb": "^3.1121.0",
     "date-fns": "^4.4.0",
-    "serverless-offline": "^7.1.0",
+    "serverless": "^4.41.1",
+    "serverless-offline": "^14.8.0",
     "uuid": "^14.0.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "serverless"
+    ]
   }
 }

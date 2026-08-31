@@ -5,6 +5,13 @@
   "license": "MIT",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.1121.0",
-    "serverless-offline": "^7.1.0"
+    "serverless": "^4.41.1",
+    "serverless-offline": "^14.8.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "serverless"
+    ]
   }
 }

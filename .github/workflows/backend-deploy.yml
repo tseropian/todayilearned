@@ -28,6 +28,8 @@ jobs:
     - name: Install dependencies
       run: cd backend && pnpm install
     - name: Validate Serverless config
+      env:
+        SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
       run: cd backend && npx serverless print
     - name: Configure AWS Credentials
       if: github.event_name == 'push'
@@ -38,4 +40,6 @@ jobs:
         aws-region: eu-west-1
     - name: Deploy
       if: github.event_name == 'push'
+      env:
+        SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
       run: cd backend && npx serverless deploy

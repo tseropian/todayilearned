@@ -13,25 +13,27 @@ provider:
     METADATA_TABLE: til-wikipedia-metadata
     DATA_BUCKET: todayilearned-prod
     DATA_PREFIX: data
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-        - dynamodb:BatchGetItem
-        - dynamodb:BatchWriteItem
-      Resource:
-        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/til-links-live"
-        - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/til-wikipedia-metadata"
-    - Effect: Allow
-      Action:
-        - s3:PutObject
-        - s3:GetObject
-      Resource: "arn:aws:s3:::${self:provider.environment.DATA_BUCKET}/${self:provider.environment.DATA_PREFIX}/*"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:BatchGetItem
+            - dynamodb:BatchWriteItem
+          Resource:
+            - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/til-links-live"
+            - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/til-wikipedia-metadata"
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+            - s3:GetObject
+          Resource: "arn:aws:s3:::${self:provider.environment.DATA_BUCKET}/${self:provider.environment.DATA_PREFIX}/*"
 
 plugins:
   - serverless-offline

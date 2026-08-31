@@ -21,8 +21,15 @@ All three HTTP routes resolve to the same invoke URL:
 ```sh
 cd backend
 pnpm install
+npx serverless login   # first time only - opens the Dashboard to authenticate
 npx serverless deploy
 ```
+
+Serverless Framework v4 requires authentication for every command, including
+locally (it's free for individuals/orgs under $2M revenue - see
+https://www.serverless.com/pricing). `serverless login` handles this on a
+dev machine; CI (`.github/workflows/backend-deploy.yml`) instead reads a
+Dashboard-generated Access Key from the `SERVERLESS_ACCESS_KEY` secret.
 
 ## Migrating from the old per-service gateways
 
