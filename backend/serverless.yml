@@ -53,6 +53,32 @@ package:
     - '!*/serverless.yml'
     - '!*/serverless.yaml'
 
+# When API Gateway itself returns a 4xx/5xx (e.g. an unmatched route's 403
+# "Missing Authentication Token", or a throttle), it bypasses the Lambda and so
+# emits none of the per-response CORS headers `cors: true` wires onto the
+# integration. The browser then masks the real status as a CORS error. Attach
+# CORS headers to the default gateway responses so the true status is visible.
+resources:
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: AWS::ApiGateway::GatewayResponse
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: ApiGatewayRestApi
+    GatewayResponseDefault5XX:
+      Type: AWS::ApiGateway::GatewayResponse
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_5XX
+        RestApiId:
+          Ref: ApiGatewayRestApi
+
 functions:
   # POST /links — add a link
   addLink:
