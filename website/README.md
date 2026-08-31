@@ -4,17 +4,17 @@
 
 ```bash
 # install dependencies
-$ yarn install
+$ pnpm install
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+# serve with hot reload
+$ pnpm dev
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+# build for production
+$ pnpm build
+$ pnpm preview
 
-# generate static project
-$ yarn generate
+# generate the static site (what CI deploys)
+$ pnpm generate
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+For detailed explanation on how things work, check out the [Nuxt docs](https://nuxt.com/docs).

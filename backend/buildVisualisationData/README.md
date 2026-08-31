@@ -39,7 +39,7 @@ payload (`serve.js`):
 Part of the unified service — deploy everything from `backend/`:
 
 ```sh
-cd backend && npm install && npx serverless deploy
+cd backend && pnpm install && npx serverless deploy
 ```
 
 ## Configuration (env vars, defaults in `serverless.yml`)

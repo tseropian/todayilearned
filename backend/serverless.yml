@@ -40,7 +40,16 @@ package:
   patterns:
     # Bundle only the root node_modules; drop the now-unused per-folder installs
     # and the superseded per-service serverless files.
-    - '!*/node_modules/**'
+    #
+    # These name each per-folder node_modules explicitly rather than using a
+    # `!*/node_modules/**` wildcard: with pnpm, the root node_modules itself
+    # contains nested node_modules directories (its .pnpm store lays packages
+    # out as node_modules/.pnpm/<pkg>/node_modules/<pkg>), so a wildcard here
+    # would also strip the real package files the root node_modules symlinks
+    # point to, leaving broken symlinks in the deployed zip.
+    - '!addLink/node_modules/**'
+    - '!getLinksByDate/node_modules/**'
+    - '!buildVisualisationData/node_modules/**'
     - '!*/serverless.yml'
     - '!*/serverless.yaml'
 
