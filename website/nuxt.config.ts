@@ -68,6 +68,14 @@ export default defineNuxtConfig({
     '@nuxt/eslint'
   ],
 
+  // @nuxtjs/tailwindcss's default cssPath lookup doesn't resolve against
+  // Nuxt 4's app/ srcDir, so it was silently falling back to Tailwind's
+  // bare default stylesheet (no tokens.css, no hand-written rules below the
+  // Tailwind layers). Point it at the real file explicitly.
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.css'
+  },
+
   // Build Configuration
   nitro: {
     preset: 'static',
