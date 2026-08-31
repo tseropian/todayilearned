@@ -1,6 +1,6 @@
 'use strict';
-const AWS = require('aws-sdk')
-const dynamodb = new AWS.DynamoDB({ region: 'eu-west-1' });
+const { DynamoDBClient, QueryCommand } = require('@aws-sdk/client-dynamodb')
+const dynamodb = new DynamoDBClient({ region: 'eu-west-1' });
 
 const descriptors = ['L', 'M', 'N', 'S'];
 
@@ -39,7 +39,7 @@ async function getLinksByDate(postDate) {
       ':postDate': { S: postDate },
     },
   };
-  let results = await dynamodb.query(params).promise().then((res) => res.Items);
+  let results = await dynamodb.send(new QueryCommand(params)).then((res) => res.Items);
 
   results = flatten(results);
 

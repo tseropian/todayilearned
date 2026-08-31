@@ -26,8 +26,10 @@
     "typescript": "^4.3.4"
   },
   "dependencies": {
-    "date-fns": "^2.22.1",
-    "serverless-offline": "^7.0.0",
-    "uuid": "^3.1.0"
+    "@aws-sdk/client-dynamodb": "^3.1121.0",
+    "@aws-sdk/lib-dynamodb": "^3.1121.0",
+    "date-fns": "^4.4.0",
+    "serverless-offline": "^7.1.0",
+    "uuid": "^14.0.2"
   }
 }

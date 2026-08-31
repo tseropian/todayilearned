@@ -5,13 +5,13 @@
 // was last generated.
 'use strict';
 
-const { S3 } = require('aws-sdk');
+const { S3Client, GetObjectCommand, HeadObjectCommand } = require('@aws-sdk/client-s3');
 
 const REGION = process.env.AWS_REGION || 'eu-west-1';
 const DATA_BUCKET = process.env.DATA_BUCKET || 'todayilearned-prod';
 const DATA_PREFIX = process.env.DATA_PREFIX || 'data';
 
-const s3 = new S3({ region: REGION });
+const s3 = new S3Client({ region: REGION });
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -20,8 +20,8 @@ const CORS_HEADERS = {
 };
 
 async function getJson(key) {
-  const obj = await s3.getObject({ Bucket: DATA_BUCKET, Key: key }).promise();
-  return JSON.parse(obj.Body.toString('utf8'));
+  const obj = await s3.send(new GetObjectCommand({ Bucket: DATA_BUCKET, Key: key }));
+  return JSON.parse(await obj.Body.transformToString('utf8'));
 }
 
 module.exports.serve = async () => {
@@ -31,7 +31,7 @@ module.exports.serve = async () => {
       getJson(`${DATA_PREFIX}/wikipedia-topics.json`),
       getJson(`${DATA_PREFIX}/wikipedia-top-pages.json`),
       getJson(`${DATA_PREFIX}/wikipedia-network.json`),
-      s3.headObject({ Bucket: DATA_BUCKET, Key: csvKey }).promise().catch(() => null),
+      s3.send(new HeadObjectCommand({ Bucket: DATA_BUCKET, Key: csvKey })).catch(() => null),
     ]);
 
     const createdAt = csvHead && csvHead.LastModified

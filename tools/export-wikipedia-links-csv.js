@@ -1,9 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 const fs = require('fs');
 const path = require('path');
-const { DynamoDB } = require('aws-sdk');
+const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
+const { DynamoDBDocumentClient, ScanCommand } = require('@aws-sdk/lib-dynamodb');
 
-const dynamodb = new DynamoDB.DocumentClient({ region: 'eu-west-1' });
+const dynamodb = DynamoDBDocumentClient.from(new DynamoDBClient({ region: 'eu-west-1' }));
 
 const TABLE_NAME = 'til-links-live';
 const OUTPUT_FILE = path.join(__dirname, 'wikipedia-links.csv');
@@ -18,7 +19,7 @@ async function scanAllItems() {
       ExclusiveStartKey: lastEvaluatedKey,
     };
     // eslint-disable-next-line no-await-in-loop
-    const result = await dynamodb.scan(params).promise();
+    const result = await dynamodb.send(new ScanCommand(params));
     items.push(...result.Items);
     lastEvaluatedKey = result.LastEvaluatedKey;
   } while (lastEvaluatedKey);

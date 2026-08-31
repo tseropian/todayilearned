@@ -13,20 +13,18 @@
     "lint": "pnpm lint:js"
   },
   "dependencies": {
-    "@nuxt/content": "^2.12.1",
-    "@nuxtjs/tailwindcss": "^6.11.4",
-    "axios": "^1.6.7",
-    "date-fns": "^3.3.1",
-    "echarts": "^5.5.1",
-    "nuxt": "^3.10.3",
-    "vue-echarts": "^7.0.3"
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "date-fns": "^4.4.0",
+    "echarts": "^6.1.0",
+    "nuxt": "^4.5.2",
+    "vue-echarts": "^8.2.0"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.17.0",
-    "@types/node": "^20.11.24",
-    "eslint": "^9.0.0",
-    "postcss": "^8.4.35",
-    "typescript": "^5.3.3"
+    "@types/node": "^22.20.1",
+    "eslint": "^10.9.1",
+    "postcss": "^8.5.26",
+    "typescript": "^5.9.3"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

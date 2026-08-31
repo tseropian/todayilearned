@@ -10,7 +10,9 @@
 //            data's createdAt.
 'use strict';
 
-const { DynamoDB, S3 } = require('aws-sdk');
+const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
+const { DynamoDBDocumentClient } = require('@aws-sdk/lib-dynamodb');
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 
 const { scanLinkCounts, countsToCsv } = require('./lib/exportLinks');
 const { normaliseEntries } = require('./lib/normalise');
@@ -24,17 +26,17 @@ const METADATA_TABLE = process.env.METADATA_TABLE || 'til-wikipedia-metadata';
 const DATA_BUCKET = process.env.DATA_BUCKET || 'todayilearned-prod';
 const DATA_PREFIX = process.env.DATA_PREFIX || 'data';
 
-const dynamodb = new DynamoDB.DocumentClient({ region: REGION });
-const s3 = new S3({ region: REGION });
+const dynamodb = DynamoDBDocumentClient.from(new DynamoDBClient({ region: REGION }));
+const s3 = new S3Client({ region: REGION });
 
 async function put(key, body, contentType) {
-  await s3.putObject({
+  await s3.send(new PutObjectCommand({
     Bucket: DATA_BUCKET,
     Key: key,
     Body: body,
     ContentType: contentType,
     CacheControl: 'public, max-age=300',
-  }).promise();
+  }));
   console.log(`Uploaded s3://${DATA_BUCKET}/${key}`);
 }
 

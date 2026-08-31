@@ -20,7 +20,7 @@ All three HTTP routes resolve to the same invoke URL:
 
 ```sh
 cd backend
-npm install
+pnpm install
 npx serverless deploy
 ```
 

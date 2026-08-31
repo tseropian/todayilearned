@@ -40,9 +40,44 @@ package:
   patterns:
     # Bundle only the root node_modules; drop the now-unused per-folder installs
     # and the superseded per-service serverless files.
-    - '!*/node_modules/**'
+    #
+    # These name each per-folder node_modules explicitly rather than using a
+    # `!*/node_modules/**` wildcard: with pnpm, the root node_modules itself
+    # contains nested node_modules directories (its .pnpm store lays packages
+    # out as node_modules/.pnpm/<pkg>/node_modules/<pkg>), so a wildcard here
+    # would also strip the real package files the root node_modules symlinks
+    # point to, leaving broken symlinks in the deployed zip.
+    - '!addLink/node_modules/**'
+    - '!getLinksByDate/node_modules/**'
+    - '!buildVisualisationData/node_modules/**'
     - '!*/serverless.yml'
     - '!*/serverless.yaml'
+
+# When API Gateway itself returns a 4xx/5xx (e.g. an unmatched route's 403
+# "Missing Authentication Token", or a throttle), it bypasses the Lambda and so
+# emits none of the per-response CORS headers `cors: true` wires onto the
+# integration. The browser then masks the real status as a CORS error. Attach
+# CORS headers to the default gateway responses so the true status is visible.
+resources:
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: AWS::ApiGateway::GatewayResponse
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: ApiGatewayRestApi
+    GatewayResponseDefault5XX:
+      Type: AWS::ApiGateway::GatewayResponse
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_5XX
+        RestApiId:
+          Ref: ApiGatewayRestApi
 
 functions:
   # POST /links — add a link

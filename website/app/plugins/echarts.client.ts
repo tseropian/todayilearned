@@ -9,6 +9,9 @@ import {
   GridComponent,
   LegendComponent,
 } from 'echarts/components'
+// ECharts 6 deprecated grid.containLabel in favour of grid.outerBounds; this
+// keeps TopPagesChart's `containLabel: true` behaving as it did on ECharts 5.
+import { LegacyGridContainLabel } from 'echarts/features'
 
 export default defineNuxtPlugin((nuxtApp) => {
   use([
@@ -20,6 +23,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     TooltipComponent,
     GridComponent,
     LegendComponent,
+    LegacyGridContainLabel,
   ])
   nuxtApp.vueApp.component('VChart', VChart)
 })

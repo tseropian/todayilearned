@@ -23,6 +23,7 @@ function archiveRoutes(): string[] {
 
 export default defineNuxtConfig({
   // https://nuxt.com/docs/api/configuration/nuxt-config
+  compatibilityDate: '2026-08-30',
   devtools: { enabled: true },
   experimental: { appManifest: false },
   // Global page headers: https://nuxt.com/docs/api/configuration/nuxt-config#head
@@ -66,6 +67,14 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/eslint'
   ],
+
+  // @nuxtjs/tailwindcss's default cssPath lookup doesn't resolve against
+  // Nuxt 4's app/ srcDir, so it was silently falling back to Tailwind's
+  // bare default stylesheet (no tokens.css, no hand-written rules below the
+  // Tailwind layers). Point it at the real file explicitly.
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.css'
+  },
 
   // Build Configuration
   nitro: {

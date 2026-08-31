@@ -2,9 +2,10 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
-const { DynamoDB } = require('aws-sdk');
+const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
+const { DynamoDBDocumentClient, BatchGetCommand, BatchWriteCommand } = require('@aws-sdk/lib-dynamodb');
 
-const dynamodb = new DynamoDB.DocumentClient({ region: 'eu-west-1' });
+const dynamodb = DynamoDBDocumentClient.from(new DynamoDBClient({ region: 'eu-west-1' }));
 
 const TABLE_NAME = 'til-wikipedia-metadata';
 const CSV_FILE = path.join(__dirname, 'wikipedia-links.csv');
@@ -89,9 +90,9 @@ async function getFromCache(titles) {
   const batchSize = 100;
   for (let i = 0; i < keys.length; i += batchSize) {
     const batch = keys.slice(i, i + batchSize);
-    const result = await dynamodb.batchGet({
+    const result = await dynamodb.send(new BatchGetCommand({
       RequestItems: { [TABLE_NAME]: { Keys: batch.map((k) => ({ pageTitle: k.pageTitle.S })) } },
-    }).promise();
+    }));
     for (const item of (result.Responses[TABLE_NAME] || [])) {
       cached[item.pageTitle] = item;
     }
@@ -105,13 +106,13 @@ async function saveToCache(items) {
     batches.push(items.slice(i, i + 25));
   }
   for (const batch of batches) {
-    await dynamodb.batchWrite({
+    await dynamodb.send(new BatchWriteCommand({
       RequestItems: {
         [TABLE_NAME]: batch.map((item) => ({
           PutRequest: { Item: item },
         })),
       },
-    }).promise();
+    }));
   }
 }
 
